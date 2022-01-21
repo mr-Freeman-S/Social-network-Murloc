@@ -1,0 +1,16 @@
+.header {
+  grid-area: h;
+  background-color: #C3E0E5;
+
+}
+.header img {
+height: 60px;
+}
+.span {
+  color: salmon;
+}
+
+.appName {
+  display: inline-block;
+
+}
