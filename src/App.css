@@ -7,7 +7,7 @@
     grid-template-areas:
   "h h h h"
   "n c c c";
-    grid-gap: 1em;
+/*    grid-gap: 1em;*/
 }
 
 .app-wrapper-content {
