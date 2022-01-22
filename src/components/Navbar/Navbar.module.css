@@ -1,4 +1,11 @@
 .nav {
   grid-area: n;
   background-color: #657ea8;
+  padding: 20px;
+}
+
+.navItem {
+  color: aliceblue;
+  text-decoration: none;
+
 }
