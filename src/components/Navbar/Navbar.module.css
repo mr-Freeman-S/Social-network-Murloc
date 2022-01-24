@@ -1,14 +1,15 @@
 .nav {
   grid-area: n;
-  background-color: #657ea8;
-  padding: 20px;
+  background-color: #426e86;
+  padding: 30px;
   border-radius: 2em;
 }
 
 .navItem {
-  color: aliceblue;
+  color: #2f3131;
   text-decoration: none;
   font-size: 1.5em;
+
 
 }
 

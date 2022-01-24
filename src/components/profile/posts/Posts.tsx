@@ -5,10 +5,10 @@ import s from './Posts.module.css'
 
 const Posts = () => {
     return (
-    <div>My post
+    <div className={s.content}><h3>My post:</h3>
         <div>
-            <textarea>Enter new post</textarea>
-            <button>add post</button>
+            <textarea></textarea>
+            <div><button>add post</button></div>
         </div>
         <Post message={"Hi. My name is Slava"} like={3}/>
         <Post message={"I'm first Murlok here"} like={5}/>

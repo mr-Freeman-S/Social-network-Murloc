@@ -1,5 +1,7 @@
 import React from "react";
 import s from './Post.module.css'
+import user from './pngwing.png'
+import like from './like.png'
 
 type PostPropsType = {
     message: string ,
@@ -9,9 +11,9 @@ type PostPropsType = {
 const Post = (props: PostPropsType) => {
     return (
     <div  className={s.item}>
-        <img src="https://illustrators.ru/uploads/illustration/image/1160770/main_dmitry-bolotov-murloc.jpg" alt="mrlc"></img>
-          {props.message}
-        <div>{props.like} Likes</div>
+        <div className={s.userPost}><img className={s.userImg} src={user} alt="like"/>
+          {props.message}</div>
+        <div className={s.like}><img src={like} alt={'like'}/>{props.like}</div>
     </div>
     );
 }

@@ -12,10 +12,10 @@ const ProfileInfo = (props: any) => {
 
             <div className={s.profileInf}>
                 <div><h1>Slava B</h1></div>
-                <div><h4>Date of Birthday: 19 december </h4></div>
-                <div><h4>City: Minsk </h4></div>
-                <div><h4>Education: it-incubator </h4></div>
-                <div><h4>Web Site: None </h4></div>
+                <div>Date of Birthday: 19 december</div>
+                <div>City: Minsk</div>
+                <div>Education: it-incubator</div>
+                <div>Web Site: None</div>
 
             </div>
 

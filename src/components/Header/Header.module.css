@@ -1,17 +1,19 @@
 .header {
   grid-area: h;
-  background-color: #C3E0E5;
-  padding: 10px;
+  background-color: #426e86;
+  padding-left: 30px;
+
+  border-radius: 0em    0em     2em           2em;
 
 }
 .header img {
-  height: 44px;
+  height: 47px;
 
 }
 .header div {
   vertical-align: center;
   color: black;
   display: inline-block;
-  font-weight: bold;
   font-size: 2em;
+  color: #f9ba32;
 }

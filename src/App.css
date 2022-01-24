@@ -14,15 +14,14 @@
 
 .app-wrapper-content {
     grid-area: c;
-    background-color: #5885AF;
+    background-color: #426e86;
     border-radius: 2em;
-
 }
 
 a.active {
-    color: black;
+    color: #f9ba32;
 }
 
 body {
-    background-color: #999799;
+    background-color: #f8f1e5;
 }
