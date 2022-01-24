@@ -1,19 +1,17 @@
 .header {
   grid-area: h;
   background-color: #C3E0E5;
+  padding: 10px;
 
 }
 .header img {
-  height: 60px;
+  height: 44px;
 
-  border-radius: 10em;
 }
-.span {
-  color: salmon;
-}
-
-.appName {
+.header div {
+  vertical-align: center;
+  color: black;
   display: inline-block;
-  padding: 20px;
-
+  font-weight: bold;
+  font-size: 2em;
 }

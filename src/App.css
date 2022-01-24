@@ -1,20 +1,28 @@
 .app-wrapper {
     display: grid;
     margin: 0 auto;
-    width: 1200px;
     grid-template-rows: 60px 1fr;
-    grid-template-columns: 2fr 10fr;
+    grid-template-columns: 2fr 14fr;
     grid-template-areas:
   "h h h h"
   "n c c c";
-/*    grid-gap: 1em;*/
+    grid-gap: 1em;
+
+
+
 }
 
 .app-wrapper-content {
     grid-area: c;
     background-color: #5885AF;
+    border-radius: 2em;
+
 }
 
 a.active {
-    color: red;
+    color: black;
+}
+
+body {
+    background-color: #999799;
 }

@@ -1,9 +1,19 @@
-.wallpaper {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+.content {
+    padding: 1em;
+    display: inline-block;
+    white-space: nowrap;
 
 }
-.profileUser {
-    height: 60px;
+
+.userIcon {
+
+    height: 200px;
+
+}
+
+
+.profileInf {
+    display: inline-block;
+
+
 }

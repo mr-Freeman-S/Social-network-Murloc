@@ -2,10 +2,17 @@
   grid-area: n;
   background-color: #657ea8;
   padding: 20px;
+  border-radius: 2em;
 }
 
 .navItem {
   color: aliceblue;
   text-decoration: none;
+  font-size: 1.5em;
 
+}
+
+img {
+  height: 1em;
+  margin-right: 10px;
 }
