@@ -2,9 +2,11 @@ import React from "react";
 import userIcon from './pngwing1.png'
 import style from './ProfileInfo.module.css'
 
-type PropsType = {}
+type ProfileInfoPropsType = {
 
-const ProfileInfo = (props: PropsType) => {
+}
+
+const ProfileInfo = (props: ProfileInfoPropsType) => {
     return (
         <div className={style.content}>
             <div className={style.profileInf}>
