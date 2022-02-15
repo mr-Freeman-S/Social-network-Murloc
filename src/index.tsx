@@ -3,8 +3,11 @@ import {render} from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {state} from "./redux/state";
 
-render(<App/>, document.getElementById('root'));
+
+
+render(<App {...state}/>, document.getElementById('root'));
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

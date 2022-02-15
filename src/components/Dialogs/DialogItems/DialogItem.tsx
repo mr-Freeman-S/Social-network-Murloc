@@ -1,13 +1,11 @@
 import React from 'react';
 import s from "../Dialogs.module.css";
 import {NavLink} from "react-router-dom";
+import {dialogsType} from "../../../redux/state";
 
-type DialogItemPropsType = {
-    items: Array<{id:number, name:string}>
-}
 
-const DialogItem = (props:DialogItemPropsType) => {
-    let userDialogs = props.items.map(user => <Dialog name={user.name} id={user.id}/>)
+const DialogItem = (props:Array<dialogsType>) => {
+    let userDialogs = props.map(user => <Dialog {...user}/>)
     return (
 
             <div className={s.dialogsItems}>
@@ -18,12 +16,8 @@ const DialogItem = (props:DialogItemPropsType) => {
     );
 };
 
-type DialogType = {
-    name: string,
-    id: number
-}
 
-function Dialog(props: DialogType) {
+function Dialog(props: dialogsType) {
     return (
         <div className={s.dialog}>
             <NavLink to={"/dialog/" + props.id}>{props.name}</NavLink>

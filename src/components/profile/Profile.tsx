@@ -1,18 +1,16 @@
-import React from "react";
+import React, {useState} from "react";
 import Posts from "./posts/Posts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import {profilePageType} from "../../redux/state";
 
-const Profile = () => {
-    const postData = [
-        {id: 1, post: "Hi. My name is Slava", likeCount:3},
-        {id: 2, post: "HI'm first Murlok here", likeCount:5},
-        {id: 3, post: "Do you like Murlok?", likeCount:999},
-        {id: 3, post: "i'm geek", likeCount:-1}]
+
+const Profile = (props:profilePageType) => {
+    const [postData,setPostData] = useState(props.postData)
 
     return (
         <div>
             <ProfileInfo  />
-            <Posts data={postData} />
+            <Posts data={postData} setPostData={setPostData} />
         </div>
     );
 }

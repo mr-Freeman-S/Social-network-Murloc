@@ -1,19 +1,13 @@
 import React from 'react';
 import s from "../Dialogs.module.css";
+import {messageType} from "../../../redux/state";
 
-type MessagesPropsType = {
-    dataMessages: Array<{id:number, message: string}>
-}
-
-const Messages = (props:MessagesPropsType) => {
-    let userMessages = props.dataMessages.map(m => <div className={s.messages}>{m.message}</div>)
-
+const Messages = (props: Array<messageType>) => {
+    let userMessages = props.map(m => <div className={s.messages}>{m.message}</div>)
     return (
-
-            <div className={s.messages}>
-                {userMessages}
-            </div>
-
+        <div className={s.messages}>
+            {userMessages}
+        </div>
     );
 };
 

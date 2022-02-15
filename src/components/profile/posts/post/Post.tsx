@@ -2,20 +2,17 @@ import React from "react";
 import s from './Post.module.css'
 import user from './pngwing.png'
 import like from './like.png'
+import {postType} from "../../../../redux/state";
 
-type PostPropsType = {
-    message: string,
-    like: number
-}
 
-const Post = (props: PostPropsType) => {
+const Post = (props: postType) => {
     return (
         <div className={s.item}>
             <div className={s.userPost}>
                 <img className={s.userImg} src={user} alt="like"/>
-                {props.message}
+                {props.post}
             </div>
-            <div className={s.like}><img src={like} alt={'like'}/>{props.like}</div>
+            <div className={s.like}><img src={like} alt={'like'}/>{props.likeCount}</div>
         </div>
     );
 }
