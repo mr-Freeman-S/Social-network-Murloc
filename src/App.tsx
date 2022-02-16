@@ -9,12 +9,17 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {Settings} from "./components/Setting/Settings";
 import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
-import {RootStateType} from "./redux/state";
+import {DialogPageType, profilePageType, SidebarType} from "./redux/state";
 
 
+type AppPropsType = {
+    profilePage: profilePageType
+    dialogPage: DialogPageType
+    sidebar: SidebarType
+}
 
-
-function App(props:RootStateType) {
+function App(props: AppPropsType) {
+    //console.log(props.dialogPage.dialogsData)
     return (
         <BrowserRouter>
             <div className='app-wrapper'>

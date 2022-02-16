@@ -1,4 +1,5 @@
 import {v1} from 'uuid';
+import face from './face_photo/erik-lucatero-d2MSDujJl2g-unsplash.jpg'
 
 export type messageType = {
     id: string
@@ -7,6 +8,7 @@ export type messageType = {
 export type dialogsType = {
     id: string
     name: string
+    img: string
 }
 export type postType = {
     id: string
@@ -20,7 +22,7 @@ export type DialogPageType = {
     dialogsData: Array<dialogsType>
     messagesData: Array<messageType>
 }
-type SidebarType = {}
+export type SidebarType = {}
 
 export type RootStateType = {
     profilePage:profilePageType
@@ -39,11 +41,11 @@ export let state:RootStateType = {
     },
     dialogPage: {
         dialogsData: [
-            {id: v1(), name: 'Kate'},
-            {id: v1(), name: 'Maks'},
-            {id: v1(), name: 'Artem'},
-            {id: v1(), name: 'Kostya'},
-            {id: v1(), name: 'Sveta'}
+            {id: v1(), name: 'Kate', img: './face_photo/omid-armin-xOjzehJ49Hk-unsplash.jpg'},
+            {id: v1(), name: 'Maks', img: './face_photo/nico-marks-763-mBawsfg-unsplash.jpg'},
+            {id: v1(), name: 'Artem', img: './face_photo/joseph-gonzalez-iFgRcqHznqg-unsplash.jpg'},
+            {id: v1(), name: 'Kostya', img: './face_photo/erik-lucatero-d2MSDujJl2g-unsplash.jpg'},
+            {id: v1(), name: 'Sveta', img: './face_photo/michael-dam-mEZ3PoFGs_k-unsplash.jpg'}
         ],
 
         messagesData: [

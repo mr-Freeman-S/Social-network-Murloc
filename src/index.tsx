@@ -6,8 +6,9 @@ import reportWebVitals from './reportWebVitals';
 import {state} from "./redux/state";
 
 
-
-render(<App {...state}/>, document.getElementById('root'));
+render(<React.StrictMode>
+    <App {...state}/>
+</React.StrictMode>, document.getElementById('root'));
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
