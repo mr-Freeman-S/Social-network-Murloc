@@ -6,8 +6,15 @@ import messageImg from './NavButton/email.png'
 import newsImg from './NavButton/news.png'
 import musicImg from './NavButton/music.png'
 import settingImg from './NavButton/gear.png'
+import {SidebarType} from "../../redux/state";
+import SideBar from "./SideBar";
 
-const Navbar = () => {
+
+type NavbarPropsType = {
+    friendsBar: SidebarType
+}
+
+const Navbar = (props:NavbarPropsType) => {
     return (
         <nav className={s.nav}>
             <div><NavLink to="/profile" className={s.navItem} ><img src={profileImg}/>Profile</NavLink></div>
@@ -15,6 +22,7 @@ const Navbar = () => {
             <div><NavLink to="/news" className={s.navItem}><img src={newsImg}/>News</NavLink></div>
             <div><NavLink to="/music" className={s.navItem}><img src={musicImg}/>Music</NavLink></div>
             <div><NavLink to="/settings" className={s.navItem}><img src={settingImg}/>Setting</NavLink></div>
+            <SideBar friendsBar={props.friendsBar.friends}/>
         </nav>
     );
 }

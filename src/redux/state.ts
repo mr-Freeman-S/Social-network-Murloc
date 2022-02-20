@@ -1,5 +1,7 @@
 import {v1} from 'uuid';
-import face from './face_photo/erik-lucatero-d2MSDujJl2g-unsplash.jpg'
+import faceMaks from './face_photo/erik-lucatero-d2MSDujJl2g-unsplash.jpg'
+import faceKate from './face_photo/omid-armin-xOjzehJ49Hk-unsplash.jpg'
+import faceSveta from  './face_photo/michael-dam-mEZ3PoFGs_k-unsplash.jpg'
 
 export type messageType = {
     id: string
@@ -22,7 +24,9 @@ export type DialogPageType = {
     dialogsData: Array<dialogsType>
     messagesData: Array<messageType>
 }
-export type SidebarType = {}
+export type SidebarType = {
+    friends: Array<{name:string,img:string}>
+}
 
 export type RootStateType = {
     profilePage:profilePageType
@@ -55,5 +59,11 @@ export let state:RootStateType = {
             {id: v1(), message: 'Do you want to go to the cinema'}
         ]
     },
-    sidebar: {}
+    sidebar: {
+        friends: [
+            {name: 'Maks', img: faceMaks},
+            {name: 'Kate', img: faceKate},
+            {name: 'Sveta', img: faceSveta}
+        ]
+    }
 }

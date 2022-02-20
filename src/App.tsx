@@ -24,7 +24,7 @@ function App(props: AppPropsType) {
         <BrowserRouter>
             <div className='app-wrapper'>
                 <Header/>
-                <Navbar/>
+                <Navbar friendsBar={props.sidebar}/>
                 <div className="app-wrapper-content">
                     <Routes>
                         <Route path='/profile' element={<Profile {...props.profilePage}/>}/>
