@@ -2,6 +2,7 @@ import {v1} from 'uuid';
 import faceMaks from './face_photo/erik-lucatero-d2MSDujJl2g-unsplash.jpg'
 import faceKate from './face_photo/omid-armin-xOjzehJ49Hk-unsplash.jpg'
 import faceSveta from  './face_photo/michael-dam-mEZ3PoFGs_k-unsplash.jpg'
+import messages from "../components/Dialogs/Messages/Messages";
 
 export type messageType = {
     id: string
@@ -66,4 +67,9 @@ export let state:RootStateType = {
             {name: 'Sveta', img: faceSveta}
         ]
     }
+}
+
+export const addNewMessage = (textMessage:string) => {
+    const newTask = {id:v1(), message: textMessage}
+  state.dialogPage.messagesData.push(newTask)
 }

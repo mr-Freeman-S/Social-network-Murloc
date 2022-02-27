@@ -9,13 +9,14 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {Settings} from "./components/Setting/Settings";
 import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
-import {DialogPageType, profilePageType, SidebarType} from "./redux/state";
+import { DialogPageType, profilePageType, SidebarType} from "./redux/state";
 
 
 type AppPropsType = {
     profilePage: profilePageType
     dialogPage: DialogPageType
     sidebar: SidebarType
+    addNewMessage: (text:string)=> void
 }
 
 function App(props: AppPropsType) {
@@ -28,7 +29,7 @@ function App(props: AppPropsType) {
                 <div className="app-wrapper-content">
                     <Routes>
                         <Route path='/profile' element={<Profile {...props.profilePage}/>}/>
-                        <Route path='/dialogs' element={<Dialogs {...props.dialogPage}/>}/>
+                        <Route path='/dialogs' element={<Dialogs addNewMessage={props.addNewMessage} {...props.dialogPage}/>}/>
                         <Route path='/settings' element={<Settings/>}/>
                         <Route path='/music' element={<Music/>}/>
                         <Route path='/news' element={<News/>}/>

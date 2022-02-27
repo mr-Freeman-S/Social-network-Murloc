@@ -3,11 +3,11 @@ import {render} from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {state} from "./redux/state";
+import {addNewMessage, state} from "./redux/state";
 
 
 render(<React.StrictMode>
-    <App {...state}/>
+    <App {...state} addNewMessage={addNewMessage}/>
 </React.StrictMode>, document.getElementById('root'));
 
 // If you want to start measuring performance in your app, pass a function

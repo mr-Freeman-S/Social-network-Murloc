@@ -7,6 +7,7 @@ import {dialogsType, messageType} from "../../redux/state";
 type DialogsPropsType = {
     dialogsData: Array<dialogsType>
     messagesData: Array<messageType>
+    addNewMessage: (text:string)=> void
 }
 
 function Dialogs(props: DialogsPropsType) {
@@ -14,7 +15,7 @@ function Dialogs(props: DialogsPropsType) {
     return (
         <div className={s.dialogs}>
             <DialogItem dataUsers={props.dialogsData}/>
-            <Messages data={props.messagesData}/>
+            <Messages addNewMessage={props.addNewMessage} data={props.messagesData}/>
         </div>
     );
 }
