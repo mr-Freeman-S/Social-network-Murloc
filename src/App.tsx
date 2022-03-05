@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 
 import './App.css';
 import Header from "./components/Header/Header";
@@ -16,7 +16,10 @@ type AppPropsType = {
     profilePage: profilePageType
     dialogPage: DialogPageType
     sidebar: SidebarType
-    addNewMessage: (text:string)=> void
+    addNewMessage: ()=> void
+    changeNewMessage: (e:ChangeEvent<HTMLTextAreaElement>)=> void
+    addNewPost: ()=>void
+    changeNewPost: (e:ChangeEvent<HTMLInputElement>)=>void
 }
 
 function App(props: AppPropsType) {
@@ -28,8 +31,8 @@ function App(props: AppPropsType) {
                 <Navbar friendsBar={props.sidebar}/>
                 <div className="app-wrapper-content">
                     <Routes>
-                        <Route path='/profile' element={<Profile {...props.profilePage}/>}/>
-                        <Route path='/dialogs' element={<Dialogs addNewMessage={props.addNewMessage} {...props.dialogPage}/>}/>
+                        <Route path='/profile' element={<Profile changeNewPost={props.changeNewPost} addNewPost={props.addNewPost} {...props.profilePage}/>}/>
+                        <Route path='/dialogs' element={<Dialogs changeNewMessage={props.changeNewMessage} addNewMessage={props.addNewMessage} {...props.dialogPage}/>}/>
                         <Route path='/settings' element={<Settings/>}/>
                         <Route path='/music' element={<Music/>}/>
                         <Route path='/news' element={<News/>}/>

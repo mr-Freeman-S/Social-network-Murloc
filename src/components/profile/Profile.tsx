@@ -1,16 +1,20 @@
-import React, {useState} from "react";
+import React, {ChangeEvent} from "react";
 import Posts from "./posts/Posts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import {profilePageType} from "../../redux/state";
 
 
-const Profile = (props:profilePageType) => {
-    const [postData,setPostData] = useState(props.postData)
+type profileType = profilePageType & {
+    addNewPost: () => void
+    changeNewPost: (e: ChangeEvent<HTMLInputElement>) => void
+}
+
+const Profile = (props: profileType) => {
 
     return (
         <div>
-            <ProfileInfo  />
-            <Posts data={postData} setPostData={setPostData} />
+            <ProfileInfo/>
+            <Posts changeNewPost={props.changeNewPost} addNewPost={props.addNewPost} newPost={props.newPost} postData={props.postData}/>
         </div>
     );
 }

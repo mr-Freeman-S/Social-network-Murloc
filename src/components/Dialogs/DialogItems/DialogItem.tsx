@@ -8,7 +8,6 @@ type DialogsPropsType = {dataUsers:Array<dialogsType>}
 
 const DialogItem = (props:DialogsPropsType) => {
     let userDialogs = props.dataUsers.map(user => <Dialog id={user.id} name={user.name} img={user.img}/>)
-    console.log(userDialogs)
     return (
             <div className={s.dialogsItems}>
                 {userDialogs}
