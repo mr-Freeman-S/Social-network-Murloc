@@ -3,7 +3,11 @@ import faceMaks from './face_photo/erik-lucatero-d2MSDujJl2g-unsplash.jpg'
 import faceKate from './face_photo/omid-armin-xOjzehJ49Hk-unsplash.jpg'
 import faceSveta from './face_photo/michael-dam-mEZ3PoFGs_k-unsplash.jpg'
 import {ChangeEvent} from "react";
-import {rerenderEntireTree} from "../render";
+
+
+let rerenderEntireTree = (state:any)=> {
+    console.log('State changed')
+}
 
 export type messageType = {
     id: string
@@ -96,4 +100,8 @@ export const changeNewPost = (e: ChangeEvent<HTMLInputElement>) => {
     state.profilePage.newPost = e.currentTarget.value
     console.log(state)
     rerenderEntireTree(state)
+}
+
+export const subscribe = (observer:any) => {
+  rerenderEntireTree = observer
 }
