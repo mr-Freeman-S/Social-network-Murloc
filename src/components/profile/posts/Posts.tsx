@@ -1,7 +1,7 @@
 import React, {ChangeEvent, useState} from "react";
 import Post from "./post/Post";
 import s from './Posts.module.css'
-import {addNewPost, postType} from "../../../redux/state";
+import {postType} from "../../../redux/state";
 import {v1} from "uuid";
 
 

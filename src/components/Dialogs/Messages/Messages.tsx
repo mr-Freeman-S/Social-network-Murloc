@@ -1,7 +1,7 @@
-import React, {ChangeEvent, EventHandler, useRef, useState} from 'react';
+import React, {ChangeEvent} from 'react';
 import s from "../Dialogs.module.css";
-import {addNewMessage, messageType} from "../../../redux/state";
-import {v1} from "uuid";
+import { messageType} from "../../../redux/state";
+
 
 type MessagePropsType = {
     data:  Array<messageType>
