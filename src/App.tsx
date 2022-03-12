@@ -9,7 +9,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {Settings} from "./components/Setting/Settings";
 import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
-import {DialogPageType, profilePageType, SidebarType, StoreType} from "./redux/state";
+import {DialogPageType, profilePageType, SidebarType, store, StoreType} from "./redux/state";
 
 
 type AppPropsType = {
@@ -25,8 +25,8 @@ function App(props: AppPropsType) {
                 <Navbar friendsBar={props.store.getState().sidebar}/>
                 <div className="app-wrapper-content">
                     <Routes>
-                        <Route path='/profile' element={<Profile changeNewPost={props.store.changeNewPost} addNewPost={props.store.addNewPost} {...props.store.getState().profilePage}/>}/>
-                        <Route path='/dialogs' element={<Dialogs changeNewMessage={props.store.changeNewMessage} addNewMessage={props.store.addNewMessage} {...props.store.getState().dialogPage}/>}/>
+                        <Route path='/profile' element={<Profile changeNewPost={props.store.changeNewPost.bind(store)} addNewPost={props.store.addNewPost.bind(store)} {...props.store.getState().profilePage}/>}/>
+                        <Route path='/dialogs' element={<Dialogs changeNewMessage={props.store.changeNewMessage.bind(store)} addNewMessage={props.store.addNewMessage.bind(store)} {...props.store.getState().dialogPage}/>}/>
                         <Route path='/settings' element={<Settings/>}/>
                         <Route path='/music' element={<Music/>}/>
                         <Route path='/news' element={<News/>}/>
