@@ -9,17 +9,11 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {Settings} from "./components/Setting/Settings";
 import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
-import { DialogPageType, profilePageType, SidebarType} from "./redux/state";
+import {DialogPageType, profilePageType, SidebarType, store, StoreType} from "./redux/state";
 
 
 type AppPropsType = {
-    profilePage: profilePageType
-    dialogPage: DialogPageType
-    sidebar: SidebarType
-    addNewMessage: ()=> void
-    changeNewMessage: (e:ChangeEvent<HTMLTextAreaElement>)=> void
-    addNewPost: ()=>void
-    changeNewPost: (e:ChangeEvent<HTMLInputElement>)=>void
+    store : StoreType
 }
 
 function App(props: AppPropsType) {
@@ -28,11 +22,11 @@ function App(props: AppPropsType) {
         <BrowserRouter>
             <div className='app-wrapper'>
                 <Header/>
-                <Navbar friendsBar={props.sidebar}/>
+                <Navbar friendsBar={props.store.getState().sidebar}/>
                 <div className="app-wrapper-content">
                     <Routes>
-                        <Route path='/profile' element={<Profile changeNewPost={props.changeNewPost} addNewPost={props.addNewPost} {...props.profilePage}/>}/>
-                        <Route path='/dialogs' element={<Dialogs changeNewMessage={props.changeNewMessage} addNewMessage={props.addNewMessage} {...props.dialogPage}/>}/>
+                        <Route path='/profile' element={<Profile changeNewPost={props.store.changeNewPost.bind(store)} addNewPost={props.store.addNewPost.bind(store)} {...props.store.getState().profilePage}/>}/>
+                        <Route path='/dialogs' element={<Dialogs changeNewMessage={props.store.changeNewMessage.bind(store)} addNewMessage={props.store.addNewMessage.bind(store)} {...props.store.getState().dialogPage}/>}/>
                         <Route path='/settings' element={<Settings/>}/>
                         <Route path='/music' element={<Music/>}/>
                         <Route path='/news' element={<News/>}/>
