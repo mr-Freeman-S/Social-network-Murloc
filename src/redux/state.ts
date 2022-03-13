@@ -5,10 +5,6 @@ import faceSveta from './face_photo/michael-dam-mEZ3PoFGs_k-unsplash.jpg'
 import {ChangeEvent} from "react";
 
 
-let rerenderEntireTree = (state: any) => {
-    console.log('State changed')
-}
-
 export type messageType = {
     id: string
     message: string
@@ -50,6 +46,7 @@ export type StoreType = {
     addNewPost: () => void
     changeNewPost: (e: ChangeEvent<HTMLInputElement>) => void
     subscribe: (observer: (store: StoreType) => void) => void
+    dispatch:(action:any)=>void
 }
 
 export let store = {
@@ -88,32 +85,48 @@ export let store = {
             ]
         }
     },
+    _callSubscriber(state:RootStateType) {
+        console.log('State changed')
+    },
     getState() {
         return this._state
     },
-    addNewMessage() {
+    _addNewMessage() {
         const newTask = {id: v1(), message: this._state.dialogPage.newMessageText}
         this._state.dialogPage.messagesData.push(newTask)
         this._state.dialogPage.newMessageText = ''
-        rerenderEntireTree(this)
+        this._callSubscriber(this._state)
     },
-    changeNewMessage(e: ChangeEvent<HTMLTextAreaElement>) {
+    _changeNewMessage(e: ChangeEvent<HTMLTextAreaElement>) {
         this._state.dialogPage.newMessageText = e.currentTarget.value
-        rerenderEntireTree(this)
+        this._callSubscriber(this._state)
     },
-    addNewPost() {
+    _addNewPost() {
         const newPost: postType = {id: v1(), post: this._state.profilePage.newPost, likeCount: 0}
         this._state.profilePage.postData.push(newPost)
         this._state.profilePage.newPost = ''
         console.log(`add new post ${newPost}`)
-        rerenderEntireTree(this)
+        this._callSubscriber(this._state)
     },
-    changeNewPost(e: ChangeEvent<HTMLInputElement>) {
+    _changeNewPost(e: ChangeEvent<HTMLInputElement>) {
         this._state.profilePage.newPost = e.currentTarget.value
-        rerenderEntireTree(this)
+        this._callSubscriber(this._state)
     },
-    subscribe(observer: (store: StoreType) => void) {
-        rerenderEntireTree = observer
+    subscribe(observer: (state: RootStateType) => void) {
+        this._callSubscriber = observer;
+    },
+
+
+    dispatch(action:any){
+        if (action.type === 'ADD-POST'){
+            this._addNewPost()
+        }else if (action.type === "CHANGE-NEW-MESSAGE"){
+            this._changeNewMessage(action.e)
+        }else if (action.type === "ADD-NEW-MESSAGE"){
+            this._addNewMessage()
+        }else if (action.type === "CHANGE-NEW-POST"){
+            this._changeNewPost(action.e)
+        }
     }
 }
 
