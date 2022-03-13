@@ -6,18 +6,23 @@ import { messageType} from "../../../redux/state";
 type MessagePropsType = {
     data:  Array<messageType>
     newMessageText:string
-    addNewMessage: ()=> void
-    changeNewMessage: (e:ChangeEvent<HTMLTextAreaElement>)=> void
+    dispatch:(action:any)=> void
+
 }
 
 const Messages = (props: MessagePropsType) => {
     let userMessages = props.data.map(m => <div className={s.messages}>{m.message}</div>)
-
+    const onChangeHandler = (e:ChangeEvent<HTMLTextAreaElement>) => {
+      props.dispatch({type:'CHANGE-NEW-MESSAGE', e:e})
+    }
+    const onClickHandler = () => {
+      props.dispatch({type:'ADD-NEW-MESSAGE'})
+    }
     return (
         <div className={s.messages}>
             {userMessages}
-            <div><textarea placeholder='Enter message' onChange={(e)=> props.changeNewMessage(e)} value={props.newMessageText} cols={50} rows={3}/>
-            <button onClick={()=> props.addNewMessage()} >add post</button></div>
+            <div><textarea placeholder='Enter message' onChange={onChangeHandler} value={props.newMessageText} cols={50} rows={3}/>
+            <button onClick={onClickHandler} >add post</button></div>
         </div>
     );
 };

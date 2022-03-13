@@ -8,8 +8,7 @@ import {v1} from "uuid";
 type PostsPropsType = {
     newPost: string
     postData: Array<postType>
-    changeNewPost: (e: ChangeEvent<HTMLInputElement>) => void
-    addNewPost: () => void
+    dispatch:(action:any)=> void
 }
 
 const Posts = (props: PostsPropsType) => {
@@ -18,11 +17,13 @@ const Posts = (props: PostsPropsType) => {
 
 
     function onChangeHandler(event: ChangeEvent<HTMLInputElement>) {
-        props.changeNewPost(event)
+        //props.changeNewPost(event)
+        props.dispatch({type:"CHANGE-NEW-POST", e: event})
     }
 
     function onClickAddNewPost() {
-        props.addNewPost()
+        //props.addNewPost()
+        props.dispatch({type:'ADD-POST'})
     }
 
     return (

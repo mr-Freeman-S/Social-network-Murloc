@@ -8,8 +8,7 @@ type DialogsPropsType = {
     dialogsData: Array<dialogsType>
     messagesData: Array<messageType>
     newMessageText:string
-    addNewMessage: ()=> void
-    changeNewMessage: (e:ChangeEvent<HTMLTextAreaElement>)=> void
+    dispatch:(action:any)=> void
 }
 
 function Dialogs(props: DialogsPropsType) {
@@ -17,7 +16,7 @@ function Dialogs(props: DialogsPropsType) {
     return (
         <div className={s.dialogs}>
             <DialogItem dataUsers={props.dialogsData}/>
-            <Messages newMessageText={props.newMessageText} changeNewMessage={props.changeNewMessage} addNewMessage={props.addNewMessage} data={props.messagesData}/>
+            <Messages newMessageText={props.newMessageText} dispatch={props.dispatch} data={props.messagesData}/>
         </div>
     );
 }
