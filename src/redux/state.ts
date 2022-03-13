@@ -31,13 +31,11 @@ export type DialogPageType = {
 export type SidebarType = {
     friends: Array<{ name: string, img: string }>
 }
-
 export type RootStateType = {
     profilePage: profilePageType
     dialogPage: DialogPageType
     sidebar: SidebarType
 }
-
 export type StoreType = {
     _state: RootStateType
     getState: () => RootStateType
@@ -46,7 +44,7 @@ export type StoreType = {
     addNewPost: () => void
     changeNewPost: (e: ChangeEvent<HTMLInputElement>) => void
     subscribe: (observer: (store: StoreType) => void) => void
-    dispatch:(action:any)=>void
+    dispatch: (action: any) => void
 }
 
 export let store = {
@@ -85,7 +83,7 @@ export let store = {
             ]
         }
     },
-    _callSubscriber(state:RootStateType) {
+    _callSubscriber(state: RootStateType) {
         console.log('State changed')
     },
     getState() {
@@ -117,18 +115,27 @@ export let store = {
     },
 
 
-    dispatch(action:any){
-        if (action.type === 'ADD-POST'){
+    dispatch(action: any) {
+        if (action.type === 'ADD-POST') {
             this._addNewPost()
-        }else if (action.type === "CHANGE-NEW-MESSAGE"){
-            this._changeNewMessage(action.e)
-        }else if (action.type === "ADD-NEW-MESSAGE"){
+        } else if (action.type === "CHANGE-NEW-MESSAGE") {
+            this._changeNewMessage(action.event)
+        } else if (action.type === "ADD-NEW-MESSAGE") {
             this._addNewMessage()
-        }else if (action.type === "CHANGE-NEW-POST"){
-            this._changeNewPost(action.e)
+        } else if (action.type === "CHANGE-NEW-POST") {
+            this._changeNewPost(action.event)
         }
     }
 }
 
+const ADD_POST = 'ADD-POST'
+const CHANGE_POST = "CHANGE-NEW-POST"
+const ADD_MESSAGE = "ADD-NEW-MESSAGE"
+const CHANGE_MESSAGE = "CHANGE-NEW-MESSAGE"
 
-
+export const addNewPostActionCreator = () => ({type: ADD_POST})
+export const changeNewPostActionCreator = (e: ChangeEvent<HTMLInputElement>) =>
+    ({type: CHANGE_POST, event: e})
+export const addNewMessageActionCreator = () => ({type: ADD_MESSAGE})
+export const changeNewMessageActionCreator = (e: ChangeEvent<HTMLTextAreaElement>) =>
+    ({type: CHANGE_MESSAGE, event: e})
