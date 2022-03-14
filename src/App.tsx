@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from 'react';
+import React from 'react';
 
 import './App.css';
 import Header from "./components/Header/Header";
@@ -9,7 +9,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {Settings} from "./components/Setting/Settings";
 import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
-import {DialogPageType, profilePageType, RootStateType, SidebarType, store, StoreType} from "./redux/state";
+import { RootStateType, store} from "./redux/state";
 
 
 type AppPropsType = {
