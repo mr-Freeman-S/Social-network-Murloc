@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import App from './App';
-import {store, StoreType} from "./redux/state";
+import {store, StoreType} from "./redux/store";
 
 test('renders learn react link', () => {
   const store = {} as StoreType;

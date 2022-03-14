@@ -2,7 +2,7 @@ import React from "react";
 import s from './Post.module.css'
 import user from './pngwing.png'
 import like from './like.png'
-import {postType} from "../../../../redux/state";
+import {postType} from "../../../../redux/store";
 
 
 const Post = (props: postType) => {

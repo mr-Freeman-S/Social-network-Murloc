@@ -3,6 +3,10 @@ import faceMaks from './face_photo/erik-lucatero-d2MSDujJl2g-unsplash.jpg'
 import faceKate from './face_photo/omid-armin-xOjzehJ49Hk-unsplash.jpg'
 import faceSveta from './face_photo/michael-dam-mEZ3PoFGs_k-unsplash.jpg'
 import {ChangeEvent} from "react";
+import profileReducer from "./profile-reducer";
+import dialogsReducer from "./dialogs-reducer";
+import sideBar from "../components/Navbar/SideBar";
+import sidebarReducer from "./sidebarReducer";
 
 
 export type messageType = {
@@ -89,53 +93,14 @@ export let store = {
     getState() {
         return this._state
     },
-    _addNewMessage() {
-        const newTask = {id: v1(), message: this._state.dialogPage.newMessageText}
-        this._state.dialogPage.messagesData.push(newTask)
-        this._state.dialogPage.newMessageText = ''
-        this._callSubscriber(this._state)
-    },
-    _changeNewMessage(e: ChangeEvent<HTMLTextAreaElement>) {
-        this._state.dialogPage.newMessageText = e.currentTarget.value
-        this._callSubscriber(this._state)
-    },
-    _addNewPost() {
-        const newPost: postType = {id: v1(), post: this._state.profilePage.newPost, likeCount: 0}
-        this._state.profilePage.postData.push(newPost)
-        this._state.profilePage.newPost = ''
-        console.log(`add new post ${newPost}`)
-        this._callSubscriber(this._state)
-    },
-    _changeNewPost(e: ChangeEvent<HTMLInputElement>) {
-        this._state.profilePage.newPost = e.currentTarget.value
-        this._callSubscriber(this._state)
-    },
     subscribe(observer: (state: RootStateType) => void) {
         this._callSubscriber = observer;
     },
 
-
     dispatch(action: any) {
-        if (action.type === 'ADD-POST') {
-            this._addNewPost()
-        } else if (action.type === "CHANGE-NEW-MESSAGE") {
-            this._changeNewMessage(action.event)
-        } else if (action.type === "ADD-NEW-MESSAGE") {
-            this._addNewMessage()
-        } else if (action.type === "CHANGE-NEW-POST") {
-            this._changeNewPost(action.event)
-        }
+       this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogPage =  dialogsReducer(this._state.dialogPage, action)
+        this._state.sidebar = sidebarReducer(this._state.sidebar, action)
+      this._callSubscriber(this._state)
     }
 }
-
-const ADD_POST = 'ADD-POST'
-const CHANGE_POST = "CHANGE-NEW-POST"
-const ADD_MESSAGE = "ADD-NEW-MESSAGE"
-const CHANGE_MESSAGE = "CHANGE-NEW-MESSAGE"
-
-export const addNewPostActionCreator = () => ({type: ADD_POST})
-export const changeNewPostActionCreator = (e: ChangeEvent<HTMLInputElement>) =>
-    ({type: CHANGE_POST, event: e})
-export const addNewMessageActionCreator = () => ({type: ADD_MESSAGE})
-export const changeNewMessageActionCreator = (e: ChangeEvent<HTMLTextAreaElement>) =>
-    ({type: CHANGE_MESSAGE, event: e})

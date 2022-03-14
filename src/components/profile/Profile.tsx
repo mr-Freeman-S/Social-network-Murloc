@@ -1,7 +1,7 @@
 import React, {ChangeEvent} from "react";
 import Posts from "./posts/Posts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import {profilePageType} from "../../redux/state";
+import {profilePageType} from "../../redux/store";
 
 
 type profileType = profilePageType & {

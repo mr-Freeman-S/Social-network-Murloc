@@ -6,7 +6,7 @@ import messageImg from './NavButton/email.png'
 import newsImg from './NavButton/news.png'
 import musicImg from './NavButton/music.png'
 import settingImg from './NavButton/gear.png'
-import {SidebarType} from "../../redux/state";
+import {SidebarType} from "../../redux/store";
 import SideBar from "./SideBar";
 
 

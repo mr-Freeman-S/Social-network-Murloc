@@ -1,9 +1,8 @@
-import React, {ChangeEvent, useState} from "react";
+import React, {ChangeEvent} from "react";
 import Post from "./post/Post";
 import s from './Posts.module.css'
-import {addNewPostActionCreator, changeNewPostActionCreator, postType} from "../../../redux/state";
-import {v1} from "uuid";
-
+import {postType} from "../../../redux/store";
+import {addNewPostActionCreator, changeNewPostActionCreator} from "../../../redux/profile-reducer";
 
 type PostsPropsType = {
     newPost: string
@@ -12,12 +11,9 @@ type PostsPropsType = {
 }
 
 const Posts = (props: PostsPropsType) => {
-
     let userPosts = props.postData.map(post => <Post {...post} />)
 
-
     function onChangeHandler(event: ChangeEvent<HTMLInputElement>) {
-        //props.changeNewPost(event)
         props.dispatch(changeNewPostActionCreator(event))
     }
 
