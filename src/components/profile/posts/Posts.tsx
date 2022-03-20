@@ -7,19 +7,18 @@ import {addNewPostActionCreator, changeNewPostActionCreator} from "../../../redu
 type PostsPropsType = {
     newPost: string
     postData: Array<postType>
-    dispatch: (action: any) => void
+    onChangeCallback: (e: ChangeEvent<HTMLInputElement>) => void
+    addNewPost: () => void
 }
 
 const Posts = (props: PostsPropsType) => {
     let userPosts = props.postData.map(post => <Post {...post} />)
 
     function onChangeHandler(event: ChangeEvent<HTMLInputElement>) {
-        props.dispatch(changeNewPostActionCreator(event))
+        props.onChangeCallback(event)
     }
-
     function onClickAddNewPost() {
-        //props.addNewPost()
-        props.dispatch(addNewPostActionCreator())
+        props.addNewPost()
     }
 
     return (

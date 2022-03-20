@@ -5,7 +5,6 @@ import faceSveta from './face_photo/michael-dam-mEZ3PoFGs_k-unsplash.jpg'
 import {ChangeEvent} from "react";
 import profileReducer from "./profile-reducer";
 import dialogsReducer from "./dialogs-reducer";
-import sideBar from "../components/Navbar/SideBar";
 import sidebarReducer from "./sidebarReducer";
 
 

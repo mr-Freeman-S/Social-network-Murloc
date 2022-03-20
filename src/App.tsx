@@ -9,12 +9,13 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {Settings} from "./components/Setting/Settings";
 import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
-import { RootStateType, store} from "./redux/store";
+import {RootStateType, store, StoreType} from "./redux/store";
 
 
 type AppPropsType = {
-    state : RootStateType
-    dispatch:(action:any)=> void
+/*    state : RootStateType
+    dispatch:(action:any)=> void*/
+    store:StoreType
 }
 
 function App(props: AppPropsType) {
@@ -23,11 +24,11 @@ function App(props: AppPropsType) {
         <BrowserRouter>
             <div className='app-wrapper'>
                 <Header/>
-                <Navbar friendsBar={props.state.sidebar}/>
+                <Navbar friendsBar={props.store.getState().sidebar}/>
                 <div className="app-wrapper-content">
                     <Routes>
-                        <Route path='/profile' element={<Profile dispatch={props.dispatch.bind(store)} {...props.state.profilePage}/>}/>
-                        <Route path='/dialogs' element={<Dialogs dispatch={props.dispatch.bind(store)} {...props.state.dialogPage}/>}/>
+                        <Route path='/profile' element={<Profile store={props.store}/>}/>
+                        <Route path='/dialogs' element={<Dialogs store={props.store}/>}/>
                         <Route path='/settings' element={<Settings/>}/>
                         <Route path='/music' element={<Music/>}/>
                         <Route path='/news' element={<News/>}/>

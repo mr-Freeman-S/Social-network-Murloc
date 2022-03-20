@@ -2,21 +2,23 @@ import React, {ChangeEvent} from "react";
 import s from './Dialogs.module.css'
 import DialogItem from "./DialogItems/DialogItem";
 import Messages from "./Messages/Messages";
-import {dialogsType, messageType} from "../../redux/store";
+import {dialogsType, messageType, StoreType} from "../../redux/store";
+import MessagesContainer from "./Messages/MessagesContainer";
 
 type DialogsPropsType = {
-    dialogsData: Array<dialogsType>
+    /*dialogsData: Array<dialogsType>
     messagesData: Array<messageType>
     newMessageText:string
-    dispatch:(action:any)=> void
+    dispatch:(action:any)=> void*/
+    store:StoreType
 }
 
 function Dialogs(props: DialogsPropsType) {
 
     return (
         <div className={s.dialogs}>
-            <DialogItem dataUsers={props.dialogsData}/>
-            <Messages newMessageText={props.newMessageText} dispatch={props.dispatch} data={props.messagesData}/>
+            <DialogItem dataUsers={props.store.getState().dialogPage.dialogsData}/>
+            <MessagesContainer store={props.store}/>
         </div>
     );
 }

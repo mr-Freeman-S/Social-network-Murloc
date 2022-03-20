@@ -1,19 +1,20 @@
 import React, {ChangeEvent} from "react";
 import Posts from "./posts/Posts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import {profilePageType} from "../../redux/store";
+import {profilePageType, StoreType} from "../../redux/store";
+import PostsContainer from "./posts/PostsContainer";
 
 
-type profileType = profilePageType & {
-    dispatch:(action:any)=> void
+type profileType = /*profilePageType & */{
+    /*dispatch:(action:any)=> void*/
+    store:StoreType
 }
 
 const Profile = (props: profileType) => {
-
     return (
         <div>
             <ProfileInfo/>
-            <Posts dispatch={props.dispatch}  newPost={props.newPost} postData={props.postData}/>
+            <PostsContainer store={props.store}/>
         </div>
     );
 }
