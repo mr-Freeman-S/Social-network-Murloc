@@ -18,5 +18,4 @@ export type AppStateType =  ReturnType<typeof rootReducer>
 let store:StoreType = createStore(rootReducer)
 
 
-
 export default store;
