@@ -1,24 +1,35 @@
 import React, {ChangeEvent} from "react";
-import { StoreType} from "../../../redux/store";
-import {addNewPostActionCreator, changeNewPostActionCreator} from "../../../redux/profile-reducer";
+import {addNewPostAC, changeNewPostAC, postType} from "../../../redux/profile-reducer";
 import Posts from "./Posts";
+import {connect} from "react-redux";
+import {AppStateType} from "../../../redux/redux-store";
+import {Dispatch} from "redux";
 
-type PostsContainerPropsType = {
-    store:StoreType
+type mapStateToPropsType = {
+    postData: Array<postType>
+    newPost: string
+}
+type mapDispatchToPropsType = {
+    addNewPost: () => void
+    onChangeCallback: (event: ChangeEvent<HTMLInputElement>) => void
+}
+const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
+    return {
+        postData: state.profilePage.postData,
+        newPost: state.profilePage.newPost
+    }
+}
+const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
+    return {
+        addNewPost: () => {
+            dispatch(addNewPostAC())
+        },
+        onChangeCallback: (event: ChangeEvent<HTMLInputElement>) => {
+            dispatch(changeNewPostAC(event))
+        }
+    }
 }
 
-const PostsContainer = (props: PostsContainerPropsType) => {
-    let state = props.store.getState()
-
-    function onChangeHandler(event: ChangeEvent<HTMLInputElement>) {
-        props.store.dispatch(changeNewPostActionCreator(event))
-    }
-
-    function onClickAddPost() {
-        props.store.dispatch(addNewPostActionCreator())
-    }
-
-    return <Posts postData={state.profilePage.postData} addNewPost={onClickAddPost} newPost={state.profilePage.newPost} onChangeCallback={onChangeHandler}/>
-}
+const PostsContainer = connect(mapStateToProps, mapDispatchToProps)(Posts)
 
 export default PostsContainer;

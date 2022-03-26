@@ -48,6 +48,7 @@ export type StoreType = {
     changeNewPost: (e: ChangeEvent<HTMLInputElement>) => void
     subscribe: (observer: (store: StoreType) => void) => void
     dispatch: (action: any) => void
+
 }
 
 export let store = {

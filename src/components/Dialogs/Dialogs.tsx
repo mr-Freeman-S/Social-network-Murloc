@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from "react";
+import React from "react";
 import s from './Dialogs.module.css'
 import DialogItem from "./DialogItems/DialogItem";
 import Messages from "./Messages/Messages";
@@ -18,7 +18,7 @@ function Dialogs(props: DialogsPropsType) {
     return (
         <div className={s.dialogs}>
             <DialogItem dataUsers={props.store.getState().dialogPage.dialogsData}/>
-            <MessagesContainer store={props.store}/>
+            <MessagesContainer />
         </div>
     );
 }
