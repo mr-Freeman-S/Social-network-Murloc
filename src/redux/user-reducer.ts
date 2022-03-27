@@ -1,36 +1,11 @@
-export type userType = { id: string, followed: boolean, fullName: string, status: string, location: { city: string, country: string } }
+export type userType = { id: string,photoURL:string, followed: boolean, fullName: string, status: string, location: { city: string, country: string } }
 
 type initialStateType = {
     users: Array<userType>
 }
 
 const initialState = {
-    users: [
-        {
-            id: "1",
-            photoURL: 'https://i.pinimg.com/474x/74/54/f4/7454f48ca380efe63151cc478aee8f01.jpg',
-            followed: true,
-            fullName: 'Dmitry',
-            status: 'I am a boss',
-            location: {city: 'Minsk', country: 'Belarus'}
-        },
-        {
-            id: "2",
-            photoURL: 'https://i.pinimg.com/originals/7d/8d/ce/7d8dce037c6591d7c85d1edf4d16b1d6.jpg',
-            followed: true,
-            fullName: 'Andrei',
-            status: 'I am a boss too',
-            location: {city: 'Moscow', country: 'Russia'}
-        },
-        {
-            id: "3",
-            photoURL: 'https://miro.medium.com/max/504/0*AVD1uRFfib6ZYhsD.',
-            followed: false,
-            fullName: 'Slava',
-            status: 'I am a boss too',
-            location: {city: 'Kiev', country: 'Ukraine'}
-        }
-    ]
+    users: []
 
 }
 
