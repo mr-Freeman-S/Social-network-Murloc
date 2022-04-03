@@ -1,4 +1,14 @@
-export type userType = { id: string,photoURL:string, followed: boolean, fullName: string, status: string, location: { city: string, country: string } }
+export type userType = {
+    "name": string,
+    "id": number,
+    "uniqueUrlName": string | null,
+    "photos": {
+        "small": string | null,
+        "large": string | null
+    },
+    "status": string | null,
+    "followed": boolean
+}
 
 type initialStateType = {
     users: Array<userType>
@@ -38,10 +48,10 @@ const FOLLOW = "FOLLOW"
 const UNFOLLOW = 'UNFOLLOW'
 const USERSSET = 'USERSSET'
 
-export const followAC = (userID: string) => {
+export const followAC = (userID: number) => {
     return {type: FOLLOW, payload: {userID: userID} as const} as const
 }
-export const unfollowAC = (userID: string) => {
+export const unfollowAC = (userID: number) => {
     return {type: UNFOLLOW, payload: {userID: userID} as const} as const
 }
 export const setUsersAC = (users: userType[]) => {
