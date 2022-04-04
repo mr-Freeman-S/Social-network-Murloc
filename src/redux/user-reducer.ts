@@ -32,7 +32,7 @@ export const userReducer = (state: initialStateType = initialState, action: allT
                 users: state.users.map(el => el.id === action.payload.userID ? {...el, followed: true} : el)
             }
         case USERSSET:
-            return {...state, users: [...state.users, ...action.payload.users]}
+            return {...state, users: [...action.payload.users]}
 
         default:
             return state
