@@ -1,38 +1,50 @@
-import React from 'react';
-import {UsersPropsType} from "./ContainerUsers";
-import s from './Users.module.css'
-import axios from "axios";
-import userPhoto from './../profile/ProfileInfo/pngwing1.png'
+import React from "react";
+import {Pagination} from "@mui/material";
+import s from "./Users.module.css";
+import userPhoto from "../profile/ProfileInfo/pngwing1.png";
+import {userType} from "../../redux/user-reducer";
+
+
+export type UsersPropsType = {
+    totalUsers: number
+    currentPage: number
+    followCallback: (userID: number) => void
+    onChangeCurrentPage: (value: number) => void
+    unfollowCallback: (userID: number) => void
+    usersData: userType[]
+    pageSize: number
+}
 
 const Users = (props: UsersPropsType) => {
-    const getUsers = ()=>{
-    if (props.usersData.length === 0) {
-        debugger
-
-
-    }}
-
-    return (
-        <div>
-            <button onClick={getUsers} > get users</button>
-            {
-                props.usersData.map(el => {
-                    return <div key={el.id}>
-                        <div><img className={s.photoUser}  src={el.photos.small ? el.photos.small: userPhoto } alt="photo"/>
+    const pagesCount = Math.ceil(props.totalUsers / props.pageSize)
+    const pages = []
+    for (let i = 1; i <= pagesCount; i++) {
+        pages.push(i)
+    }
+    const onChangeHandler = (event: React.ChangeEvent<unknown>, page: number) =>
+        props.onChangeCurrentPage(page)
+    return <div>
+        <Pagination count={pagesCount} page={props.currentPage} onChange={onChangeHandler} size="large"
+                    showFirstButton showLastButton/>
+        {
+            props.usersData.map(el => {
+                return <div key={el.id}>
+                    <div><img className={s.photoUser} src={el.photos.small ? el.photos.small : userPhoto}
+                              alt="photo"/>
                         <h3>{el.name}</h3>
-                            <p>{el.status}</p>
-
-                        </div>
-                        <div>
-                            {el.followed ? <button onClick={()=> props.followCallback(el.id)}>Unfollow</button>: <button onClick={()=> props.unfollowCallback(el.id)}>Follow</button>}
-
-                        </div>
+                        <p>{el.status}</p>
 
                     </div>
-                })
-            }
-        </div>
-    );
-};
+                    <div>
+                        {el.followed ? <button onClick={() => props.followCallback(el.id)}>Unfollow</button> :
+                            <button onClick={() => props.unfollowCallback(el.id)}>Follow</button>}
+
+                    </div>
+
+                </div>
+            })
+        }
+    </div>
+}
 
 export default Users;
