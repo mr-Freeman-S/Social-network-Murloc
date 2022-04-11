@@ -1,5 +1,5 @@
 import React from "react";
-import {Pagination} from "@mui/material";
+import {CircularProgress, Pagination} from "@mui/material";
 import s from "./Users.module.css";
 import userPhoto from "../profile/ProfileInfo/pngwing1.png";
 import {userType} from "../../redux/user-reducer";
@@ -13,6 +13,7 @@ export type UsersPropsType = {
     unfollowCallback: (userID: number) => void
     usersData: userType[]
     pageSize: number
+    isLoading: boolean
 }
 
 const Users = (props: UsersPropsType) => {
@@ -26,11 +27,13 @@ const Users = (props: UsersPropsType) => {
     return <div>
         <Pagination count={pagesCount} page={props.currentPage} onChange={onChangeHandler} size="large"
                     showFirstButton showLastButton/>
-        {
+        {props.isLoading ? <CircularProgress  size={50}/>
+            :
             props.usersData.map(el => {
                 return <div key={el.id}>
-                    <div><img className={s.photoUser} src={el.photos.small ? el.photos.small : userPhoto}
-                              alt="photo"/>
+                    <div>
+                        <img className={s.photoUser} src={el.photos.small ? el.photos.small : userPhoto}
+                             alt="photo"/>
                         <h3>{el.name}</h3>
                         <p>{el.status}</p>
 
