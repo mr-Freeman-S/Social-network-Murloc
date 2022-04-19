@@ -1,7 +1,7 @@
 import React from 'react';
 
 type SideBarPropsType = {
-    friendsBar: { name: string, img: string }[]
+   // friendsBar: { name: string, img: string }[]
 }
 
 const SideBar = (props: SideBarPropsType) => {
@@ -23,28 +23,28 @@ const SideBar = (props: SideBarPropsType) => {
     return (
         <div style={styleFriends}>
             <div>
-                <img style={friendsStyle} src={props.friendsBar[0].img} alt=""/>
+                <img style={friendsStyle} src={''} alt=""/>
                 <caption style={{
                     textAlign: 'center', color: "#2f3131",
                     textDecoration: "none",
                     fontSize: "1.5em"
-                }}>{props.friendsBar[0].name}</caption>
+                }}>{''}</caption>
             </div>
             <div>
-                <img style={friendsStyle} src={props.friendsBar[1].img} alt=""/>
+                <img style={friendsStyle} src={''} alt=""/>
                 <caption style={{
                     textAlign: 'center', color: "#2f3131",
                     textDecoration: "none",
                     fontSize: "1.5em"
-                }}>{props.friendsBar[1].name}</caption>
+                }}>{''}</caption>
             </div>
             <div>
-                <img style={friendsStyle} src={props.friendsBar[2].img} alt=""/>
+                <img style={friendsStyle} src={''} alt=""/>
                 <caption style={{
                     textAlign: 'center', color: "#2f3131",
                     textDecoration: "none",
                     fontSize: "1.5em"
-                }}>{props.friendsBar[2].name}</caption>
+                }}>{''}</caption>
             </div>
 
 

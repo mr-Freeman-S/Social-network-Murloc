@@ -4,13 +4,13 @@ import {NavLink} from "react-router-dom";
 import {dialogsType} from "../../../redux/store";
 
 
-type DialogsPropsType = {dataUsers:Array<dialogsType>}
+type DialogsPropsType = {}
 
 const DialogItem = (props:DialogsPropsType) => {
-    let userDialogs = props.dataUsers.map(user => <Dialog id={user.id} name={user.name} img={user.img}/>)
+    //let userDialogs = props.dataUsers.map(user => <Dialog id={user.id} name={user.name} img={user.img}/>)
     return (
             <div className={s.dialogsItems}>
-                {userDialogs}
+                {/*{userDialogs}*/}
             </div>
     );
 };

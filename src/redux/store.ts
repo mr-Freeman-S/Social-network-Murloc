@@ -51,6 +51,7 @@ export type StoreType = {
 
 }
 
+/*
 export let store = {
     _state: {
         profilePage: {
@@ -104,3 +105,4 @@ export let store = {
       this._callSubscriber(this._state)
     }
 }
+*/

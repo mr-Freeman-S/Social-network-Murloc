@@ -10,14 +10,13 @@ type DialogsPropsType = {
     messagesData: Array<messageType>
     newMessageText:string
     dispatch:(action:any)=> void*/
-    store:StoreType
 }
 
 function Dialogs(props: DialogsPropsType) {
 
     return (
         <div className={s.dialogs}>
-            <DialogItem dataUsers={props.store.getState().dialogPage.dialogsData}/>
+            <DialogItem />
             <MessagesContainer />
         </div>
     );

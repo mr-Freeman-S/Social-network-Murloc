@@ -3,6 +3,7 @@ import {CircularProgress, Pagination} from "@mui/material";
 import s from "./Users.module.css";
 import userPhoto from "../profile/ProfileInfo/pngwing1.png";
 import {userType} from "../../redux/user-reducer";
+import {NavLink} from "react-router-dom";
 
 
 export type UsersPropsType = {
@@ -31,13 +32,14 @@ const Users = (props: UsersPropsType) => {
             :
             props.usersData.map(el => {
                 return <div key={el.id}>
-                    <div>
+                    <NavLink to={`/profile/${el.id}`}>
                         <img className={s.photoUser} src={el.photos.small ? el.photos.small : userPhoto}
                              alt="photo"/>
+                    </NavLink>
                         <h3>{el.name}</h3>
                         <p>{el.status}</p>
 
-                    </div>
+
                     <div>
                         {el.followed ? <button onClick={() => props.followCallback(el.id)}>Unfollow</button> :
                             <button onClick={() => props.unfollowCallback(el.id)}>Follow</button>}

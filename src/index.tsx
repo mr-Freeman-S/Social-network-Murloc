@@ -10,7 +10,7 @@ import {Provider} from "react-redux";
 const rerenderEntireTree = (store:any) => {
     render(<React.StrictMode>
         <Provider store={store}>
-        <App store={store} />
+        <App />
         </Provider>
     </React.StrictMode>, document.getElementById('root'));
 }

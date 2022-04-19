@@ -1,20 +1,17 @@
 .content {
-    padding: 1em;
-    display: inline-block;
-    white-space: nowrap;
+    display: grid;
+    grid-gap: 1em;
+    margin-left: 40px;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: start;
 
 }
 
 .userIcon {
-
     height: 200px;
+}
+.contacts {
 
 }
 
 
-.profileInf {
-    display: inline-block;
-    color: #2f3131;
-    font-size: 1.5em;
-    font-weight: bolder;
-}

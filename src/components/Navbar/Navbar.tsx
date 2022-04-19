@@ -11,7 +11,6 @@ import SideBar from "./SideBar";
 
 
 type NavbarPropsType = {
-    friendsBar: SidebarType
 }
 
 const Navbar = (props:NavbarPropsType) => {
@@ -23,7 +22,7 @@ const Navbar = (props:NavbarPropsType) => {
             <div><NavLink to="/music" className={s.navItem}><img src={musicImg}/>Music</NavLink></div>
             <div><NavLink to="/settings" className={s.navItem}><img src={settingImg}/>Setting</NavLink></div>
             <div><NavLink to="/users" className={s.navItem}><img src={settingImg}/>Users</NavLink></div>
-            <SideBar friendsBar={props.friendsBar.friends}/>
+            <SideBar />
         </nav>
     );
 }
