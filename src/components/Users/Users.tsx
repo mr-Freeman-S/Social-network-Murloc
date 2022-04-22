@@ -1,6 +1,6 @@
 import React from "react";
 import {CircularProgress, Pagination} from "@mui/material";
-import s from "./Users.module.css";
+import style from "./Users.module.css";
 import userPhoto from "../profile/ProfileInfo/pngwing1.png";
 import {userType} from "../../redux/user-reducer";
 import {NavLink} from "react-router-dom";
@@ -28,16 +28,16 @@ const Users = (props: UsersPropsType) => {
     return <div>
         <Pagination count={pagesCount} page={props.currentPage} onChange={onChangeHandler} size="large"
                     showFirstButton showLastButton/>
-        {props.isLoading ? <CircularProgress  size={50}/>
+        {props.isLoading ? <CircularProgress size={50}/>
             :
             props.usersData.map(el => {
                 return <div key={el.id}>
                     <NavLink to={`/profile/${el.id}`}>
-                        <img className={s.photoUser} src={el.photos.small ? el.photos.small : userPhoto}
+                        <img className={style.photoUser} src={el.photos.small ? el.photos.small : userPhoto}
                              alt="photo"/>
                     </NavLink>
-                        <h3>{el.name}</h3>
-                        <p>{el.status}</p>
+                    <h3>{el.name}</h3>
+                    <p>{el.status}</p>
 
 
                     <div>

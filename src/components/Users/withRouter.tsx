@@ -2,7 +2,7 @@ import { useLocation, useNavigate, useParams} from "react-router-dom";
 import React, {JSXElementConstructor} from "react";
 
 
-
+//HOC
 export const  withRouter=(Component:JSXElementConstructor<any>):JSXElementConstructor<any>=> {
     function ComponentWithRouterProp(props:any) {
         let location = useLocation();

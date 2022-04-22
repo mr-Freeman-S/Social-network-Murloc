@@ -1,27 +1,9 @@
-import {v1} from 'uuid';
-import faceMaks from './face_photo/erik-lucatero-d2MSDujJl2g-unsplash.jpg'
-import faceKate from './face_photo/omid-armin-xOjzehJ49Hk-unsplash.jpg'
-import faceSveta from './face_photo/michael-dam-mEZ3PoFGs_k-unsplash.jpg'
 import {ChangeEvent} from "react";
-import profileReducer from "./profile-reducer";
-import dialogsReducer from "./dialogs-reducer";
-import sidebarReducer from "./sidebarReducer";
+import {dialogsType, messageType} from "./dialogs-reducer";
+import {postType} from "./profile-reducer";
 
 
-export type messageType = {
-    id: string
-    message: string
-}
-export type dialogsType = {
-    id: string
-    name: string
-    img: string
-}
-export type postType = {
-    id: string
-    post: string
-    likeCount: number
-}
+
 export type profilePageType = {
     postData: Array<postType>
     newPost: string

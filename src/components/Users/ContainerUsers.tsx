@@ -5,8 +5,10 @@ import {AppStateType} from "../../redux/redux-store";
 import {Dispatch} from 'redux';
 import {
     followAC,
-    setCurrentPageAC, setTotalUsersCountAC,
-    setUsersAC, toggleIsLoadingAC,
+    setCurrentPageAC,
+    setTotalUsersCountAC,
+    setUsersAC,
+    toggleIsLoadingAC,
     unfollowAC,
     userType
 } from "../../redux/user-reducer";
@@ -17,7 +19,7 @@ class UsersContainer extends React.Component<UsersContainerType> {
 
     componentDidMount() {
         this.props.toggleIsLoading(true)
-        axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}`).then(response => {
             this.props.toggleIsLoading(false)
             this.props.setUsers(response.data.items);
             this.props.setTotalUsersCount(response.data.totalCount)
@@ -52,7 +54,7 @@ type mapStateToPropsType = {
     totalUsers: number
     currentPage: number
     pageSize: number
-    isLoading:boolean
+    isLoading: boolean
 
 }
 type mapDispatchToProps = {
@@ -72,7 +74,7 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
         totalUsers: state.userPage.totalUsersCount,
         currentPage: state.userPage.currentPage,
         pageSize: state.userPage.pageSize,
-        isLoading:state.userPage.isLoading
+        isLoading: state.userPage.isLoading
     }
 }
 const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToProps => {

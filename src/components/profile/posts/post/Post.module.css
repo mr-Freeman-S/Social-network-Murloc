@@ -1,17 +1,19 @@
 .item {
-  color: #2f3131;
-  padding: 30px;
+    color: #2f3131;
+    padding: 30px;
 }
 
 .userImg {
-  width: 100px;
-  height: 100px;
+    width: 100px;
+    height: 100px;
 
 
 }
+
 .userPost {
-  font-size: 1.5em;
+    font-size: 1.5em;
 }
+
 .like {
-  font-size: 1.5em;
+    font-size: 1.5em;
 }

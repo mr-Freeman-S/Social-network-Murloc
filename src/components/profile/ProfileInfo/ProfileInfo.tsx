@@ -20,18 +20,15 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
             </div>
             <div className={style.contacts}>
                 <h3>Contacts</h3>
-                <div>{ props.profileInfo?.contacts.vk ? `vk: ${props.profileInfo?.contacts.vk}`: ``}</div>
-                <div>{ props.profileInfo?.contacts.website ? `website: ${props.profileInfo?.contacts.website}`: ``}</div>
-                <div>{ props.profileInfo?.contacts.youtube ? `youtube: ${props.profileInfo?.contacts.youtube}`: ``}</div>
-                <div>{ props.profileInfo?.contacts.twitter ? `twitter: ${props.profileInfo?.contacts.twitter}`: ``}</div>
-                <div>{ props.profileInfo?.contacts.facebook ? `facebook: ${props.profileInfo?.contacts.facebook}`: ``}</div>
-                <div>{ props.profileInfo?.contacts.mainLink ? `mainLink: ${props.profileInfo?.contacts.mainLink}`: ``}</div>
-                <div>{ props.profileInfo?.contacts.instagram ? `instagram: ${props.profileInfo?.contacts.instagram}`: ``}</div>
-                <div>{ props.profileInfo?.contacts.github ? `github: ${props.profileInfo?.contacts.github}`: ``}</div>
-
-
-
-
+                {/*bad practice for contacts need refactor*/}
+                <div>{props.profileInfo?.contacts.vk ? `vk: ${props.profileInfo?.contacts.vk}` : ``}</div>
+                <div>{props.profileInfo?.contacts.website ? `website: ${props.profileInfo?.contacts.website}` : ``}</div>
+                <div>{props.profileInfo?.contacts.youtube ? `youtube: ${props.profileInfo?.contacts.youtube}` : ``}</div>
+                <div>{props.profileInfo?.contacts.twitter ? `twitter: ${props.profileInfo?.contacts.twitter}` : ``}</div>
+                <div>{props.profileInfo?.contacts.facebook ? `facebook: ${props.profileInfo?.contacts.facebook}` : ``}</div>
+                <div>{props.profileInfo?.contacts.mainLink ? `mainLink: ${props.profileInfo?.contacts.mainLink}` : ``}</div>
+                <div>{props.profileInfo?.contacts.instagram ? `instagram: ${props.profileInfo?.contacts.instagram}` : ``}</div>
+                <div>{props.profileInfo?.contacts.github ? `github: ${props.profileInfo?.contacts.github}` : ``}</div>
             </div>
 
         </div>

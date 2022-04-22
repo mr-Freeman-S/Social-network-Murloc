@@ -1,12 +1,10 @@
 import React from 'react';
 
-type SideBarPropsType = {
-   // friendsBar: { name: string, img: string }[]
-}
 
-const SideBar = (props: SideBarPropsType) => {
 
-    const styleFriends = {
+const SideBar = () => {
+// example style object
+    const wrapper = {
         display: 'inline-grid',
         gridTemplateColumns: '1fr 1fr 1fr',
         width: '100%',
@@ -19,9 +17,9 @@ const SideBar = (props: SideBarPropsType) => {
         borderRadius: '25px',
     }
 
-
+// style in JSX bad practice
     return (
-        <div style={styleFriends}>
+        <div style={wrapper}>
             <div>
                 <img style={friendsStyle} src={''} alt=""/>
                 <caption style={{

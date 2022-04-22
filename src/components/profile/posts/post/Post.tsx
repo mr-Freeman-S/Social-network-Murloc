@@ -1,18 +1,17 @@
 import React from "react";
-import s from './Post.module.css'
+import style from './Post.module.css'
 import user from './pngwing.png'
 import like from './like.png'
-import {postType} from "../../../../redux/store";
-
+import {postType} from "../../../../redux/profile-reducer";
 
 const Post = (props: postType) => {
     return (
-        <div className={s.item}>
-            <div className={s.userPost}>
-                <img className={s.userImg} src={user} alt="like"/>
+        <div className={style.item}>
+            <div className={style.userPost}>
+                <img className={style.userImg} src={user} alt="like"/>
                 {props.post}
             </div>
-            <div className={s.like}><img src={like} alt={'like'}/>{props.likeCount}</div>
+            <div className={style.like}><img src={like} alt={'like'}/>{props.likeCount}</div>
         </div>
     );
 }

@@ -1,7 +1,15 @@
-import {DialogPageType, dialogsType, messageType} from "./store";
 import {v1} from "uuid";
 import {ChangeEvent} from "react";
 
+export type dialogsType = {
+    id: string
+    name: string
+    img: string
+}
+export type messageType = {
+    id: string
+    message: string
+}
 export type InitialStateType = {
     dialogsData: Array<dialogsType>
     messagesData: Array<messageType>
@@ -31,11 +39,13 @@ const dialogsReducer = (state: InitialStateType = initialState, action: allActio
     switch (action.type) {
         case ADD_MESSAGE:
             const newMessage = {id: v1(), message: state.newMessageText}
-            return {...state,
-                messagesData:[...state.messagesData,newMessage],
-                newMessageText:''}
+            return {
+                ...state,
+                messagesData: [...state.messagesData, newMessage],
+                newMessageText: ''
+            }
         case CHANGE_MESSAGE:
-            return {...state,newMessageText:action.payload.event.currentTarget.value}
+            return {...state, newMessageText: action.payload.event.currentTarget.value}
         default:
             return state
     }

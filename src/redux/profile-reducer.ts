@@ -33,12 +33,12 @@ export type ProfileType = {
     }
 }
 type initialStateType = {
-    profile:null | ProfileType
+    profile: null | ProfileType
     postData: Array<postType>
-    newPost:string
+    newPost: string
 }
 
-let initialState:initialStateType = {
+let initialState: initialStateType = {
     profile: null,
     postData: [
         {id: v1(), post: "Hi. My name is Slava", likeCount: 3},
@@ -49,24 +49,24 @@ let initialState:initialStateType = {
     newPost: ''
 }
 
-const profileReducer = (state: initialStateType = initialState, action: ActionsTypes):initialStateType => {
+const profileReducer = (state: initialStateType = initialState, action: ActionsTypes): initialStateType => {
     switch (action.type) {
         case ADD_POST:
             const newPost: postType = {id: v1(), post: state.newPost, likeCount: 0}
 
-            return {...state,postData:[newPost,...state.postData],newPost:''}
+            return {...state, postData: [newPost, ...state.postData], newPost: ''}
         case CHANGE_POST:
-            return {...state,newPost: action.event.currentTarget.value}
+            return {...state, newPost: action.event.currentTarget.value}
         case CHANGE_PROFILE:
-            return {...state,profile:action.profile}
+            return {...state, profile: action.profile}
         default:
             return state
     }
 }
 type ActionsTypes = addNewPostACType | changeNewPostACType | setUserProfileType
 export type addNewPostACType = ReturnType<typeof addNewPostAC>
-export type changeNewPostACType  = ReturnType<typeof changeNewPostAC>
-export type setUserProfileType  = ReturnType<typeof setUserProfile>
+export type changeNewPostACType = ReturnType<typeof changeNewPostAC>
+export type setUserProfileType = ReturnType<typeof setUserProfile>
 
 
 export const addNewPostAC = () => ({type: ADD_POST} as const)

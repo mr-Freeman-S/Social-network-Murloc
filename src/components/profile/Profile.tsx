@@ -1,7 +1,5 @@
-import React, {ChangeEvent} from "react";
-import Posts from "./posts/Posts";
+import React from "react";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import {profilePageType, StoreType} from "../../redux/store";
 import PostsContainer from "./posts/PostsContainer";
 import {ProfileType} from "../../redux/profile-reducer";
 

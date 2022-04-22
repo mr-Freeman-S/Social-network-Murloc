@@ -20,7 +20,7 @@ class ContainerProfile extends React.Component<ContainerProfileType> {
     componentDidMount() {
         // @ts-ignore
         let userID = this.props.router.params.userID
-        if (!userID){
+        if (!userID) {
             userID = 23091
         }
         axios(`https://social-network.samuraijs.com/api/1.0/profile/${userID}`).then(response => {
@@ -39,6 +39,5 @@ let mapStateToProps = (state: AppStateType): mapStateToPropsType => ({
 })
 
 
-
-
+//example: one mdtp object drop in props
 export default connect(mapStateToProps, {setUserProfile})(withRouter(ContainerProfile))

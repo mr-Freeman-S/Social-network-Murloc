@@ -56,7 +56,7 @@ export type allTypeReducer =
     | setUsersACType
     | setTotalUsersCountACType
     | setCurrentPageACType
-    |toggleIsLoadingType;
+    | toggleIsLoadingType;
 export type followACType = ReturnType<typeof followAC>
 export type unfollowACType = ReturnType<typeof unfollowAC>
 export type setUsersACType = ReturnType<typeof setUsersAC>
@@ -86,7 +86,7 @@ export const setTotalUsersCountAC = (TotalUsers: number) => {
 export const setCurrentPageAC = (currentPage: number) => {
     return {type: SET_CURRENT_PAGE, payload: {currentPage}} as const
 }
-export const toggleIsLoadingAC = (isLoading:boolean)=> {
+export const toggleIsLoadingAC = (isLoading: boolean) => {
     return {type: TOGGLE_IS_LOADING, payload: {isLoading}} as const
 }
 
