@@ -32,12 +32,12 @@ export const userReducer = (state: initialStateType = initialState, action: allT
         case FOLLOW:
             return {
                 ...state,
-                users: state.users.map(el => el.id === action.payload.userID ? {...el, followed: false} : el)
+                users: state.users.map(el => el.id === action.payload.userID ? {...el, followed: true} : el)
             }
         case UNFOLLOW:
             return {
                 ...state,
-                users: state.users.map(el => el.id === action.payload.userID ? {...el, followed: true} : el)
+                users: state.users.map(el => el.id === action.payload.userID ? {...el, followed: false} : el)
             }
         case TOGGLE_IS_LOADING:
         case SET_TOTAL_USERS_COUNT:
