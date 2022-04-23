@@ -1,10 +1,12 @@
 .header {
+    display: inline-grid;
     grid-area: h;
     background-color: #426e86;
     padding-left: 30px;
-
     border-radius: 0 0 2em 2em;
+    grid-template-columns: 1fr 1fr;
 
+    justify-content: space-around;
 }
 
 .header img {
@@ -17,4 +19,13 @@
     display: inline-block;
     font-size: 2em;
     color: #f9ba32;
+}
+.loginBlock {
+    justify-self: end;
+   right: 100px;
+}
+.loginBlock div {
+    font-size: 1em;
+    right: 100px;
+
 }

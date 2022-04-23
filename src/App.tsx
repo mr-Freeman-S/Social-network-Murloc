@@ -7,6 +7,7 @@ import Dialogs from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import ContainerUsers from "./components/Users/ContainerUsers";
 import ProfileContainer from "./components/profile/ContainerProfile"
+import ContainerHeader from "./components/Header/ContainerHeader";
 
 
 type AppPropsType = {
@@ -19,7 +20,7 @@ function App(props: AppPropsType) {
     return (
         <BrowserRouter>
             <div className='app-wrapper'>
-                <Header/>
+                <ContainerHeader/>
                 <Navbar />
                 <div className="app-wrapper-content">
                     <Routes>
