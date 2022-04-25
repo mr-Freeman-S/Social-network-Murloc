@@ -32,7 +32,7 @@ export const userReducer = (state: initialStateType = initialState, action: allT
         case FOLLOW:
             return {
                 ...state,
-                users: state.users.map(el => el.id === action.payload.userID ? {...el, followed: true} : el)
+                users: state.users.map(el => el.id === action.payload.userID ? {...el, followed: !el.followed} : el)
             }
         case UNFOLLOW:
             return {

@@ -1,9 +1,9 @@
 import React from "react";
 import Header from "./Header";
-import axios from "axios";
 import {AppStateType} from "../../redux/redux-store";
 import {setAuthUserDataAC, setFetchingAC, userAuthData} from "../../redux/auth-reducer";
 import {connect} from "react-redux";
+import {getAuthMe} from "../../api/api";
 
 type ContainerHeaderPropsType = mapStateToPropsType &{
     setAuthUserDataAC: (userData: userAuthData) => void
@@ -14,12 +14,10 @@ class ContainerHeader extends React.Component<ContainerHeaderPropsType, any> {
 
     componentDidMount() {
         this.props.setFetchingAC(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
-            withCredentials:true
-        }).then(
-            response => {
-                if(response.data.resultCode === 0){
-                this.props.setAuthUserDataAC(response.data.data)
+        getAuthMe().then(
+            data => {
+                if(data.resultCode === 0){
+                this.props.setAuthUserDataAC(data.data)
                 }
                 this.props.setFetchingAC(false)
 

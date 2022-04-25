@@ -13,16 +13,17 @@ import {
     userType
 } from "../../redux/user-reducer";
 import axios from "axios";
+import {getUsersAPI} from "../../api/api";
 
 
 class UsersContainer extends React.Component<UsersContainerType> {
 
     componentDidMount() {
         this.props.toggleIsLoading(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}`, {withCredentials: true}).then(response => {
+        getUsersAPI(this.props.pageSize,this.props.currentPage).then(data => {
             this.props.toggleIsLoading(false)
-            this.props.setUsers(response.data.items);
-            this.props.setTotalUsersCount(response.data.totalCount)
+            this.props.setUsers(data.items);
+            this.props.setTotalUsersCount(data.totalCount)
         })
     }
 
@@ -30,9 +31,9 @@ class UsersContainer extends React.Component<UsersContainerType> {
         const onChangeCurrentPage = (value: number) => {
             this.props.setCurrentPage(value)
             this.props.toggleIsLoading(true)
-            axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${value}`, {withCredentials: true}).then(response => {
+            getUsersAPI(this.props.pageSize,value).then(data => {
                 this.props.toggleIsLoading(false)
-                this.props.setUsers(response.data.items)
+                this.props.setUsers(data.items)
             })
         }
         return <Users totalUsers={this.props.totalUsers}
