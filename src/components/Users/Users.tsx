@@ -4,7 +4,6 @@ import style from "./Users.module.css";
 import userPhoto from "../profile/ProfileInfo/pngwing1.png";
 import {userType} from "../../redux/user-reducer";
 import {NavLink} from "react-router-dom";
-import axios from "axios";
 import {followOrUser} from "../../api/api";
 
 
@@ -17,6 +16,8 @@ export type UsersPropsType = {
     usersData: userType[]
     pageSize: number
     isLoading: boolean
+    toggleIsFollowing: (id: number, isFetching: boolean) => void
+    followIsProgress: Array<number>
 }
 
 const Users = (props: UsersPropsType) => {
@@ -29,16 +30,21 @@ const Users = (props: UsersPropsType) => {
     const onChangeHandler = (event: React.ChangeEvent<unknown>, page: number) =>
         props.onChangeCurrentPage(page)
     const followUnfollowHandler = (followed: boolean, id: number) => {
+        console.log(props.followIsProgress)
+        props.toggleIsFollowing(id,true)
         followed ? followOrUser("delete", id).then(data => {
                 if (data.resultCode === 0) {
                     props.followCallback(id)
+                    props.toggleIsFollowing(id,false)
                 }
             })
             : followOrUser("post", id).then(data => {
                 if (data.resultCode === 0) {
                     props.followCallback(id)
+                    props.toggleIsFollowing(id,false)
                 }
             })
+        console.log(props.followIsProgress)
 
     }
     return <div>
@@ -55,7 +61,7 @@ const Users = (props: UsersPropsType) => {
                     <h3>{el.name}</h3>
                     <p>{el.status}</p>
                     <div>
-                        <button
+                        <button disabled={props.followIsProgress.some(id => id === el.id)}
                             onClick={() => followUnfollowHandler(el.followed, el.id)}>
                             {el.followed ? `Unfollow` : `Follow`}
                         </button>

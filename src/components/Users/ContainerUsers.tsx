@@ -8,11 +8,11 @@ import {
     setCurrentPageAC,
     setTotalUsersCountAC,
     setUsersAC,
+    toggleIsFollowing,
     toggleIsLoadingAC,
     unfollowAC,
     userType
 } from "../../redux/user-reducer";
-import axios from "axios";
 import {getUsersAPI} from "../../api/api";
 
 
@@ -20,7 +20,7 @@ class UsersContainer extends React.Component<UsersContainerType> {
 
     componentDidMount() {
         this.props.toggleIsLoading(true)
-        getUsersAPI(this.props.pageSize,this.props.currentPage).then(data => {
+        getUsersAPI(this.props.pageSize, this.props.currentPage).then(data => {
             this.props.toggleIsLoading(false)
             this.props.setUsers(data.items);
             this.props.setTotalUsersCount(data.totalCount)
@@ -31,7 +31,7 @@ class UsersContainer extends React.Component<UsersContainerType> {
         const onChangeCurrentPage = (value: number) => {
             this.props.setCurrentPage(value)
             this.props.toggleIsLoading(true)
-            getUsersAPI(this.props.pageSize,value).then(data => {
+            getUsersAPI(this.props.pageSize, value).then(data => {
                 this.props.toggleIsLoading(false)
                 this.props.setUsers(data.items)
             })
@@ -44,6 +44,8 @@ class UsersContainer extends React.Component<UsersContainerType> {
                       usersData={this.props.usersData}
                       pageSize={this.props.pageSize}
                       isLoading={this.props.isLoading}
+                      toggleIsFollowing={this.props.toggleIsFollowing}
+                      followIsProgress={this.props.followIsProgress}
 
         />
     }
@@ -56,6 +58,7 @@ type mapStateToPropsType = {
     currentPage: number
     pageSize: number
     isLoading: boolean
+    followIsProgress: Array<number>
 
 }
 type mapDispatchToProps = {
@@ -65,6 +68,7 @@ type mapDispatchToProps = {
     setCurrentPage: (page: number) => void
     setTotalUsersCount: (totalUsers: number) => void
     toggleIsLoading: (isLoading: boolean) => void
+    toggleIsFollowing: (id: number, isFetching: boolean) => void
 }
 export type UsersContainerType = mapStateToPropsType & mapDispatchToProps
 
@@ -75,7 +79,8 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
         totalUsers: state.userPage.totalUsersCount,
         currentPage: state.userPage.currentPage,
         pageSize: state.userPage.pageSize,
-        isLoading: state.userPage.isLoading
+        isLoading: state.userPage.isLoading,
+        followIsProgress: state.userPage.followIsProgress
     }
 }
 const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToProps => {
@@ -97,6 +102,9 @@ const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToProps => {
         },
         toggleIsLoading: (isLoading: boolean) => {
             dispatch(toggleIsLoadingAC(isLoading))
+        },
+        toggleIsFollowing: (id: number, isFetching: boolean) => {
+            dispatch(toggleIsFollowing(id, isFetching))
         }
     }
 }
