@@ -12,16 +12,6 @@ class ContainerHeader extends React.Component<ContainerHeaderPropsType, any> {
 
     componentDidMount() {
         this.props.authMeThunk()
-        /*this.props.setFetchingAC(true)
-        getAuthMe().then(
-            data => {
-                if(data.resultCode === 0){
-                this.props.setAuthUserDataAC(data.data)
-                }
-                this.props.setFetchingAC(false)
-
-            }
-        )*/
     }
 
     render() {

@@ -15,7 +15,7 @@ export type UsersPropsType = {
     isLoading: boolean
     toggleIsFollowing: (id: number, isFetching: boolean) => void
     followIsProgress: Array<number>
-    followUnfollowThunk: (action: "post"| "delete", userID: number) => void
+    followUnfollowThunk: (action: "post" | "delete", userID: number) => void
 }
 
 const Users = (props: UsersPropsType) => {
@@ -29,9 +29,9 @@ const Users = (props: UsersPropsType) => {
         props.onChangeCurrentPage(page)
     const followUnfollowHandler = (followed: boolean, id: number) => {
         console.log(props.followIsProgress)
-        props.toggleIsFollowing(id,true)
+        props.toggleIsFollowing(id, true)
         followed ? props.followUnfollowThunk("delete", id)
-            :  props.followUnfollowThunk("post", id)
+            : props.followUnfollowThunk("post", id)
     }
     return <div>
         <Pagination count={pagesCount} page={props.currentPage} onChange={onChangeHandler} size="large"
@@ -48,7 +48,7 @@ const Users = (props: UsersPropsType) => {
                     <p>{el.status}</p>
                     <div>
                         <button disabled={props.followIsProgress.some(id => id === el.id)}
-                            onClick={() => followUnfollowHandler(el.followed, el.id)}>
+                                onClick={() => followUnfollowHandler(el.followed, el.id)}>
                             {el.followed ? `Unfollow` : `Follow`}
                         </button>
                     </div>

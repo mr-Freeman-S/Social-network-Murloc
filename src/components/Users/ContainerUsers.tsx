@@ -19,7 +19,7 @@ class UsersContainer extends React.Component<UsersContainerType> {
 
     render() {
         const onChangeCurrentPage = (value: number) => {
-            this.props.getUsersCurrentPage(value,this.props.pageSize)
+            this.props.getUsersCurrentPage(value, this.props.pageSize)
 
         }
         return <Users totalUsers={this.props.totalUsers}
@@ -50,7 +50,7 @@ type mapDispatchToPropsType = {
     toggleIsFollowing: (id: number, isFetching: boolean) => void
     getUsersThunkCreator: (pageSize: number, currentPage: number) => void
     getUsersCurrentPage: (valuePage: number, currentPage: number) => void
-    followUnfollowThunk: (action: "post"| "delete", userID: number) => void
+    followUnfollowThunk: (action: "post" | "delete", userID: number) => void
 
 }
 export type UsersContainerType = mapStateToPropsType & mapDispatchToPropsType
@@ -68,5 +68,9 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
 }
 
 
-
-export default connect(mapStateToProps, {getUsersCurrentPage,getUsersThunkCreator,toggleIsFollowing,followUnfollowThunk})(UsersContainer);
+export default connect(mapStateToProps, {
+    getUsersCurrentPage,
+    getUsersThunkCreator,
+    toggleIsFollowing,
+    followUnfollowThunk
+})(UsersContainer);
