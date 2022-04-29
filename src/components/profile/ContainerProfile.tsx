@@ -2,8 +2,7 @@ import React from "react";
 import Profile from "./Profile";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
-import {ProfileType, setUserProfile} from "../../redux/profile-reducer";
-import axios from "axios";
+import {getProfileThunk, ProfileType, setUserProfile} from "../../redux/profile-reducer";
 import {withRouter} from "../Users/withRouter";
 import {getProfile} from "../../api/api";
 
@@ -12,6 +11,7 @@ type mapStateToPropsType = {
 }
 type mapDispatchToPropsType = {
     setUserProfile: (profile: ProfileType) => void
+    getProfileThunk: (userID: number) => object
 }
 type ContainerProfileType = mapStateToPropsType & mapDispatchToPropsType
 
@@ -21,13 +21,7 @@ class ContainerProfile extends React.Component<ContainerProfileType> {
     componentDidMount() {
         // @ts-ignore
         let userID = this.props.router.params.userID
-        if (!userID) {
-            userID = 23091
-        }
-        getProfile(userID).then(data => {
-            this.props.setUserProfile(data)
-        })
-
+        this.props.getProfileThunk(userID)
     }
 
     render() {
@@ -41,4 +35,4 @@ let mapStateToProps = (state: AppStateType): mapStateToPropsType => ({
 
 
 //example: one mdtp object drop in props
-export default connect(mapStateToProps, {setUserProfile})(withRouter(ContainerProfile))
+export default connect(mapStateToProps, {setUserProfile, getProfileThunk})(withRouter(ContainerProfile))

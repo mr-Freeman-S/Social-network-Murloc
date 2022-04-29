@@ -4,20 +4,18 @@ import style from "./Users.module.css";
 import userPhoto from "../profile/ProfileInfo/pngwing1.png";
 import {userType} from "../../redux/user-reducer";
 import {NavLink} from "react-router-dom";
-import {followOrUser} from "../../api/api";
 
 
 export type UsersPropsType = {
     totalUsers: number
     currentPage: number
-    followCallback: (userID: number) => void
     onChangeCurrentPage: (value: number) => void
-    unfollowCallback: (userID: number) => void
     usersData: userType[]
     pageSize: number
     isLoading: boolean
     toggleIsFollowing: (id: number, isFetching: boolean) => void
     followIsProgress: Array<number>
+    followUnfollowThunk: (action: "post"| "delete", userID: number) => void
 }
 
 const Users = (props: UsersPropsType) => {
@@ -32,20 +30,8 @@ const Users = (props: UsersPropsType) => {
     const followUnfollowHandler = (followed: boolean, id: number) => {
         console.log(props.followIsProgress)
         props.toggleIsFollowing(id,true)
-        followed ? followOrUser("delete", id).then(data => {
-                if (data.resultCode === 0) {
-                    props.followCallback(id)
-                    props.toggleIsFollowing(id,false)
-                }
-            })
-            : followOrUser("post", id).then(data => {
-                if (data.resultCode === 0) {
-                    props.followCallback(id)
-                    props.toggleIsFollowing(id,false)
-                }
-            })
-        console.log(props.followIsProgress)
-
+        followed ? props.followUnfollowThunk("delete", id)
+            :  props.followUnfollowThunk("post", id)
     }
     return <div>
         <Pagination count={pagesCount} page={props.currentPage} onChange={onChangeHandler} size="large"
@@ -56,7 +42,7 @@ const Users = (props: UsersPropsType) => {
                 return <div key={el.id}>
                     <NavLink to={`/profile/${el.id}`}>
                         <img className={style.photoUser} src={el.photos.small ? el.photos.small : userPhoto}
-                             alt="photo"/>
+                             alt="userPhoto"/>
                     </NavLink>
                     <h3>{el.name}</h3>
                     <p>{el.status}</p>

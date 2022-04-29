@@ -2,50 +2,35 @@ import React from 'react';
 import {connect} from "react-redux";
 import Users from "./Users";
 import {AppStateType} from "../../redux/redux-store";
-import {Dispatch} from 'redux';
 import {
-    followAC,
-    setCurrentPageAC,
-    setTotalUsersCountAC,
-    setUsersAC,
+    followUnfollowThunk,
+    getUsersCurrentPage,
+    getUsersThunkCreator,
     toggleIsFollowing,
-    toggleIsLoadingAC,
-    unfollowAC,
     userType
 } from "../../redux/user-reducer";
-import {getUsersAPI} from "../../api/api";
 
 
 class UsersContainer extends React.Component<UsersContainerType> {
 
     componentDidMount() {
-        this.props.toggleIsLoading(true)
-        getUsersAPI(this.props.pageSize, this.props.currentPage).then(data => {
-            this.props.toggleIsLoading(false)
-            this.props.setUsers(data.items);
-            this.props.setTotalUsersCount(data.totalCount)
-        })
+        this.props.getUsersThunkCreator(this.props.pageSize, this.props.currentPage)
     }
 
     render() {
         const onChangeCurrentPage = (value: number) => {
-            this.props.setCurrentPage(value)
-            this.props.toggleIsLoading(true)
-            getUsersAPI(this.props.pageSize, value).then(data => {
-                this.props.toggleIsLoading(false)
-                this.props.setUsers(data.items)
-            })
+            this.props.getUsersCurrentPage(value,this.props.pageSize)
+
         }
         return <Users totalUsers={this.props.totalUsers}
                       currentPage={this.props.currentPage}
-                      followCallback={this.props.followCallback}
                       onChangeCurrentPage={onChangeCurrentPage}
-                      unfollowCallback={this.props.unfollowCallback}
                       usersData={this.props.usersData}
                       pageSize={this.props.pageSize}
                       isLoading={this.props.isLoading}
                       toggleIsFollowing={this.props.toggleIsFollowing}
                       followIsProgress={this.props.followIsProgress}
+                      followUnfollowThunk={this.props.followUnfollowThunk}
 
         />
     }
@@ -61,16 +46,14 @@ type mapStateToPropsType = {
     followIsProgress: Array<number>
 
 }
-type mapDispatchToProps = {
-    followCallback: (userID: number) => void
-    unfollowCallback: (userID: number) => void
-    setUsers: (users: Array<userType>) => void
-    setCurrentPage: (page: number) => void
-    setTotalUsersCount: (totalUsers: number) => void
-    toggleIsLoading: (isLoading: boolean) => void
+type mapDispatchToPropsType = {
     toggleIsFollowing: (id: number, isFetching: boolean) => void
+    getUsersThunkCreator: (pageSize: number, currentPage: number) => void
+    getUsersCurrentPage: (valuePage: number, currentPage: number) => void
+    followUnfollowThunk: (action: "post"| "delete", userID: number) => void
+
 }
-export type UsersContainerType = mapStateToPropsType & mapDispatchToProps
+export type UsersContainerType = mapStateToPropsType & mapDispatchToPropsType
 
 
 const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
@@ -83,31 +66,7 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
         followIsProgress: state.userPage.followIsProgress
     }
 }
-const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToProps => {
-    return {
-        followCallback: (userID: number) => {
-            dispatch(followAC(userID))
-        },
-        unfollowCallback: (userID: number) => {
-            dispatch(unfollowAC(userID))
-        },
-        setUsers: (users: Array<userType>) => {
-            dispatch(setUsersAC(users))
-        },
-        setCurrentPage: (page: number) => {
-            dispatch(setCurrentPageAC(page))
-        },
-        setTotalUsersCount: (totalUsers: number) => {
-            dispatch(setTotalUsersCountAC(totalUsers))
-        },
-        toggleIsLoading: (isLoading: boolean) => {
-            dispatch(toggleIsLoadingAC(isLoading))
-        },
-        toggleIsFollowing: (id: number, isFetching: boolean) => {
-            dispatch(toggleIsFollowing(id, isFetching))
-        }
-    }
-}
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
+
+export default connect(mapStateToProps, {getUsersCurrentPage,getUsersThunkCreator,toggleIsFollowing,followUnfollowThunk})(UsersContainer);

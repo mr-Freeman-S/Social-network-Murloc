@@ -1,3 +1,6 @@
+import {Dispatch} from "redux";
+import {getAuthMe} from "../api/api";
+
 const SET_USER_DATA = 'SET_USER_DATA'
 const SET_FETCHING = 'SET_FETCHING'
 
@@ -40,5 +43,18 @@ export type userAuthData = {
 export const setFetchingAC = (isFetching:boolean) => ({type: SET_FETCHING, isFetching} as const)
 export const setAuthUserDataAC = (userData: userAuthData) => ({type: SET_USER_DATA, userData} as const)
 
+
+export const authMeThunk = () => (dispatch:Dispatch)=> {
+    dispatch(setFetchingAC(true))
+    getAuthMe().then(
+        data => {
+            if(data.resultCode === 0){
+                dispatch(setAuthUserDataAC(data.data))
+            }
+            dispatch(setFetchingAC(false))
+
+        }
+    )
+}
 
 export default authReducer;

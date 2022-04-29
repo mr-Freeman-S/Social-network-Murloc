@@ -1,5 +1,7 @@
 import {v1} from "uuid";
 import {ChangeEvent} from "react";
+import {Dispatch} from "redux";
+import {getProfile} from "../api/api";
 
 const ADD_POST = 'ADD-POST'
 const CHANGE_POST = "CHANGE-NEW-POST"
@@ -74,5 +76,14 @@ export const changeNewPostAC = (e: ChangeEvent<HTMLInputElement>) =>
     ({type: CHANGE_POST, event: e} as const)
 export const setUserProfile = (profile: ProfileType) =>
     ({type: CHANGE_PROFILE, profile} as const)
+
+export const getProfileThunk = (userID:number) => (dispatch:Dispatch)=>{
+    if (!userID) {
+        userID = 23091
+    }
+    getProfile(userID).then(data => {
+        dispatch(setUserProfile(data))
+    })
+}
 
 export default profileReducer;

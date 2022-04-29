@@ -1,19 +1,18 @@
 import React from "react";
 import Header from "./Header";
 import {AppStateType} from "../../redux/redux-store";
-import {setAuthUserDataAC, setFetchingAC, userAuthData} from "../../redux/auth-reducer";
+import {authMeThunk} from "../../redux/auth-reducer";
 import {connect} from "react-redux";
-import {getAuthMe} from "../../api/api";
 
 type ContainerHeaderPropsType = mapStateToPropsType &{
-    setAuthUserDataAC: (userData: userAuthData) => void
-    setFetchingAC:(isFetching:boolean)=> void
+    authMeThunk:()=>void
 }
 
 class ContainerHeader extends React.Component<ContainerHeaderPropsType, any> {
 
     componentDidMount() {
-        this.props.setFetchingAC(true)
+        this.props.authMeThunk()
+        /*this.props.setFetchingAC(true)
         getAuthMe().then(
             data => {
                 if(data.resultCode === 0){
@@ -22,7 +21,7 @@ class ContainerHeader extends React.Component<ContainerHeaderPropsType, any> {
                 this.props.setFetchingAC(false)
 
             }
-        )
+        )*/
     }
 
     render() {
@@ -44,4 +43,4 @@ const mapStateToProps = (state: AppStateType):mapStateToPropsType => ({
     isFetching: state.auth.isFetching
 })
 
-export default connect(mapStateToProps, {setAuthUserDataAC, setFetchingAC})(ContainerHeader)
+export default connect(mapStateToProps, {authMeThunk})(ContainerHeader)
