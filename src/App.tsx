@@ -8,6 +8,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import ContainerUsers from "./components/Users/ContainerUsers";
 import ProfileContainer from "./components/profile/ContainerProfile"
 import ContainerHeader from "./components/Header/ContainerHeader";
+import LoginPage from "./components/Login/LoginPage";
 
 
 type AppPropsType = {
@@ -24,6 +25,7 @@ function App(props: AppPropsType) {
                 <Navbar />
                 <div className="app-wrapper-content">
                     <Routes>
+                        <Route path='/login' element={<LoginPage/>}/>
                         <Route path='/profile' element={<ProfileContainer />}>
                             <Route path={':userID'} element={<ProfileContainer/>}/>
                         </Route>

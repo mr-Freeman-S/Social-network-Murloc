@@ -5,9 +5,11 @@ import {AppStateType} from "../../redux/redux-store";
 import {getProfileThunk, ProfileType, setUserProfile} from "../../redux/profile-reducer";
 import {withRouter} from "../Users/withRouter";
 import {getProfile} from "../../api/api";
+import {Navigate} from "react-router-dom";
 
 type mapStateToPropsType = {
     profileInfo: ProfileType | null
+    isAuth:boolean
 }
 type mapDispatchToPropsType = {
     setUserProfile: (profile: ProfileType) => void
@@ -25,12 +27,14 @@ class ContainerProfile extends React.Component<ContainerProfileType> {
     }
 
     render() {
+        if(!this.props.isAuth) return <Navigate replace to="/login"/>
         return <Profile profileInfo={this.props.profileInfo}/>
     }
 }
 
 let mapStateToProps = (state: AppStateType): mapStateToPropsType => ({
-    profileInfo: state.profilePage.profile
+    profileInfo: state.profilePage.profile,
+    isAuth:state.auth.isAuthorized
 })
 
 
