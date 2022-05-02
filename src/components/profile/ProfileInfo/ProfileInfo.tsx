@@ -2,6 +2,7 @@ import React from "react";
 import userIcon from './pngwing1.png'
 import style from './ProfileInfo.module.css'
 import {ProfileType} from "../../../redux/profile-reducer";
+import StatusText from "./StatusText";
 
 type ProfileInfoPropsType = {
     profileInfo: ProfileType | null
@@ -11,6 +12,8 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
     return (
         <div className={style.content}>
             <div><h1>{props.profileInfo?.fullName}</h1>
+            <StatusText/>
+
                 <div className={style.profileInf}>{props.profileInfo?.aboutMe}</div>
                 <div className={style.profileInf}>
                     <img className={style.userIcon}
