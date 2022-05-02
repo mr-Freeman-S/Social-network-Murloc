@@ -4,7 +4,6 @@ import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
 import {getProfileThunk, ProfileType, setUserProfile} from "../../redux/profile-reducer";
 import {withRouter} from "../Users/withRouter";
-import {Navigate} from "react-router-dom";
 import {withAuthRedirect} from "../../hoc/wuthAuthRedirect";
 
 type mapStateToPropsType = {
@@ -17,17 +16,13 @@ type mapDispatchToPropsType = {
 }
 type ContainerProfileType = mapStateToPropsType & mapDispatchToPropsType
 
-
 class ContainerProfile extends React.Component<ContainerProfileType> {
-
     componentDidMount() {
         // @ts-ignore
         let userID = this.props.router.params.userID
         this.props.getProfileThunk(userID)
     }
-
     render() {
-
         return <Profile profileInfo={this.props.profileInfo}/>
     }
 }
@@ -38,5 +33,4 @@ let mapStateToProps = (state: AppStateType): mapStateToPropsType => ({
 })
 
 
-//example: one mdtp object drop in props
 export default withAuthRedirect(connect(mapStateToProps, {setUserProfile, getProfileThunk})(withRouter(ContainerProfile)))
