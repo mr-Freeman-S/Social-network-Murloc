@@ -5,10 +5,11 @@ import {AppStateType} from "../../redux/redux-store";
 import {getProfileThunk, ProfileType, setUserProfile} from "../../redux/profile-reducer";
 import {withRouter} from "../Users/withRouter";
 import {withAuthRedirect} from "../../hoc/wuthAuthRedirect";
+import {compose} from "redux";
 
 type mapStateToPropsType = {
     profileInfo: ProfileType | null
-    isAuth:boolean
+    isAuth: boolean
 }
 type mapDispatchToPropsType = {
     setUserProfile: (profile: ProfileType) => void
@@ -22,6 +23,7 @@ class ContainerProfile extends React.Component<ContainerProfileType> {
         let userID = this.props.router.params.userID
         this.props.getProfileThunk(userID)
     }
+
     render() {
         return <Profile profileInfo={this.props.profileInfo}/>
     }
@@ -29,8 +31,11 @@ class ContainerProfile extends React.Component<ContainerProfileType> {
 
 let mapStateToProps = (state: AppStateType): mapStateToPropsType => ({
     profileInfo: state.profilePage.profile,
-    isAuth:state.auth.isAuthorized
+    isAuth: state.auth.isAuthorized
 })
 
-
-export default withAuthRedirect(connect(mapStateToProps, {setUserProfile, getProfileThunk})(withRouter(ContainerProfile)))
+export default compose<React.ComponentType>(
+    withAuthRedirect,
+    connect(mapStateToProps, {setUserProfile, getProfileThunk}),
+    withRouter)
+(ContainerProfile)

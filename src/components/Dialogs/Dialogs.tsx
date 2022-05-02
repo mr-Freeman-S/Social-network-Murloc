@@ -3,15 +3,16 @@ import style from './Dialogs.module.css'
 import DialogItem from "./DialogItems/DialogItem";
 import MessagesContainer from "./Messages/MessagesContainer";
 import {withAuthRedirect} from "../../hoc/wuthAuthRedirect";
+import {compose} from "redux";
 
 
 function Dialogs() {
     return (
         <div className={style.dialogs}>
-            <DialogItem />
-            <MessagesContainer />
+            <DialogItem/>
+            <MessagesContainer/>
         </div>
     );
 }
 
-export default withAuthRedirect(Dialogs)
+export default compose<React.ComponentType>(withAuthRedirect)(Dialogs)
