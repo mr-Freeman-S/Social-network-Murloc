@@ -2,7 +2,13 @@ import React from "react";
 import Profile from "./Profile";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
-import {getProfileThunk, ProfileType, setUserProfile} from "../../redux/profile-reducer";
+import {
+    getProfileThunk,
+    getStatusThunk,
+    ProfileType,
+    setUserProfile,
+    updateStatusThunk
+} from "../../redux/profile-reducer";
 import {withRouter} from "../Users/withRouter";
 import {withAuthRedirect} from "../../hoc/wuthAuthRedirect";
 import {compose} from "redux";
@@ -10,32 +16,41 @@ import {compose} from "redux";
 type mapStateToPropsType = {
     profileInfo: ProfileType | null
     isAuth: boolean
+    status:string
 }
 type mapDispatchToPropsType = {
     setUserProfile: (profile: ProfileType) => void
-    getProfileThunk: (userID: number) => object
+    getProfileThunk: (userID: number) => void
+    getStatusThunk:(userID:string)=> void
+    updateStatusThunk:(status:string)=>void
 }
 type ContainerProfileType = mapStateToPropsType & mapDispatchToPropsType
 
 class ContainerProfile extends React.Component<ContainerProfileType> {
     componentDidMount() {
+
         // @ts-ignore
         let userID = this.props.router.params.userID
+        if (!userID){
+            userID = 23091
+        }
         this.props.getProfileThunk(userID)
+        this.props.getStatusThunk(userID)
     }
 
     render() {
-        return <Profile profileInfo={this.props.profileInfo}/>
+        return <Profile updateStatus={this.props.updateStatusThunk} status={this.props.status} profileInfo={this.props.profileInfo}/>
     }
 }
 
 let mapStateToProps = (state: AppStateType): mapStateToPropsType => ({
     profileInfo: state.profilePage.profile,
-    isAuth: state.auth.isAuthorized
+    isAuth: state.auth.isAuthorized,
+    status:state.profilePage.status
 })
 
 export default compose<React.ComponentType>(
     withAuthRedirect,
-    connect(mapStateToProps, {setUserProfile, getProfileThunk}),
+    connect(mapStateToProps, {updateStatusThunk,setUserProfile, getProfileThunk,getStatusThunk}),
     withRouter)
 (ContainerProfile)

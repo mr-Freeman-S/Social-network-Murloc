@@ -6,13 +6,15 @@ import StatusText from "./StatusText";
 
 type ProfileInfoPropsType = {
     profileInfo: ProfileType | null
+    status:string
+    updateStatus:(status:string)=>void
 }
 
 const ProfileInfo = (props: ProfileInfoPropsType) => {
     return (
         <div className={style.content}>
             <div><h1>{props.profileInfo?.fullName}</h1>
-            <StatusText/>
+            <StatusText status={props.status} updateStatus={props.updateStatus} />
 
                 <div className={style.profileInf}>{props.profileInfo?.aboutMe}</div>
                 <div className={style.profileInf}>
