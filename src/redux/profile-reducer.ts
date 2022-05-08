@@ -38,7 +38,6 @@ export type ProfileType = {
 type initialStateType = {
     profile: null | ProfileType
     postData: Array<postType>
-    newPost: string
     status:string
 }
 
@@ -50,18 +49,15 @@ let initialState: initialStateType = {
         {id: v1(), post: "Do you like Murlok?", likeCount: 999},
         {id: v1(), post: "i'm geek", likeCount: -1}
     ],
-    newPost: '',
     status: ''
 }
 
 const profileReducer = (state: initialStateType = initialState, action: ActionsTypes): initialStateType => {
     switch (action.type) {
         case ADD_POST:
-            const newPost: postType = {id: v1(), post: state.newPost, likeCount: 0}
+            const newPost: postType = {id: v1(), post: action.newPost, likeCount: 0}
 
-            return {...state, postData: [newPost, ...state.postData], newPost: ''}
-        case CHANGE_POST:
-            return {...state, newPost: action.event.currentTarget.value}
+            return {...state, postData: [newPost, ...state.postData]}
         case CHANGE_PROFILE:
             return {...state, profile: action.profile}
         case SET_STATUS:
@@ -70,16 +66,14 @@ const profileReducer = (state: initialStateType = initialState, action: ActionsT
             return state
     }
 }
-type ActionsTypes = addNewPostACType | changeNewPostACType | setUserProfileType | setStatusType
+type ActionsTypes = addNewPostACType  | setUserProfileType | setStatusType
 export type addNewPostACType = ReturnType<typeof addNewPostAC>
-export type changeNewPostACType = ReturnType<typeof changeNewPostAC>
 export type setUserProfileType = ReturnType<typeof setUserProfile>
 export type setStatusType = ReturnType<typeof setStatus>
 
 export const setStatus = (status:string) => ({type:SET_STATUS, setStatus:status} as const)
-export const addNewPostAC = () => ({type: ADD_POST} as const)
-export const changeNewPostAC = (e: ChangeEvent<HTMLInputElement>) =>
-    ({type: CHANGE_POST, event: e} as const)
+export const addNewPostAC = (newPost:string) => ({type: ADD_POST,newPost} as const)
+
 export const setUserProfile = (profile: ProfileType) =>
     ({type: CHANGE_PROFILE, profile} as const)
 //thunks

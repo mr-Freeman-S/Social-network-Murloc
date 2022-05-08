@@ -14,7 +14,7 @@ const Profile = (props: profilePropsType) => {
     return (
         <div>
             <ProfileInfo  status={props.status} updateStatus={props.updateStatus} profileInfo={props.profileInfo}/>
-            <PostsContainer/>
+            <PostsContainer  />
         </div>
     );
 }

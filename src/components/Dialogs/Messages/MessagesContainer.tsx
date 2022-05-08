@@ -8,10 +8,9 @@ import {Dispatch} from "redux";
 
 type mapStateToPropsType = {
     data: Array<messageType>
-    newMessageText: string
 }
 type mapDispatchToPropsType = {
-    onClickCallback: () => void
+    addNewMessage: (newMessageBody: string) => void
     onChangeCallback: (e: ChangeEvent<HTMLTextAreaElement>) => void
 }
 
@@ -20,15 +19,14 @@ export type MessagesPropsType = mapStateToPropsType & mapDispatchToPropsType
 const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     return {
         data: state.dialogPage.messagesData,
-        newMessageText: state.dialogPage.newMessageText
     }
 }
 
 // example: fully mdtp
 const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
     return {
-        onClickCallback: () => {
-            dispatch(addNewMessageAC())
+        addNewMessage: (newMessageBody: string) => {
+            dispatch(addNewMessageAC(newMessageBody))
         },
         onChangeCallback: (e: ChangeEvent<HTMLTextAreaElement>) => {
             let action = changeNewMessageAC(e)
@@ -36,7 +34,6 @@ const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
         }
     }
 }
-
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(Messages)

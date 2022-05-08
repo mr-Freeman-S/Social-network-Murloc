@@ -13,7 +13,6 @@ export type messageType = {
 export type InitialStateType = {
     dialogsData: Array<dialogsType>
     messagesData: Array<messageType>
-    newMessageText: string
 }
 
 let initialState = {
@@ -31,21 +30,19 @@ let initialState = {
         {id: v1(), message: 'how are you?'},
         {id: v1(), message: 'Do you want to go to the cinema'}
     ],
-    newMessageText: ''
 }
 
 
 const dialogsReducer = (state: InitialStateType = initialState, action: allActionsType): InitialStateType => {
     switch (action.type) {
         case ADD_MESSAGE:
-            const newMessage = {id: v1(), message: state.newMessageText}
+            const newMessage = {id: v1(), message: action.newMessageBody}
             return {
                 ...state,
                 messagesData: [...state.messagesData, newMessage],
-                newMessageText: ''
             }
-        case CHANGE_MESSAGE:
-            return {...state, newMessageText: action.payload.event.currentTarget.value}
+/*        case CHANGE_MESSAGE:
+            return {...state, newMessageText: action.payload.event.currentTarget.value}*/
         default:
             return state
     }
@@ -59,7 +56,7 @@ export type allActionsType = changeNewMessageACType | addNewMessageACType
 export type addNewMessageACType = ReturnType<typeof addNewMessageAC>
 export type changeNewMessageACType = ReturnType<typeof changeNewMessageAC>
 
-export const addNewMessageAC = () => ({type: ADD_MESSAGE} as const)
+export const addNewMessageAC = (newMessageBody:string) => ({type: ADD_MESSAGE , newMessageBody} as const)
 export const changeNewMessageAC = (e: ChangeEvent<HTMLTextAreaElement>) => {
     return {
         type: CHANGE_MESSAGE,
