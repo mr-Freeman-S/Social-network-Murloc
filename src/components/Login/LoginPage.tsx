@@ -1,5 +1,7 @@
 import React from 'react';
 import {Field, reduxForm} from "redux-form";
+import {Input} from "../common/FormsControls/FormControls";
+import {maxLength, required} from "../../untils/validators";
 
 const LoginPage: React.FC = (props) => {
     const submit = (value:any) => {
@@ -20,11 +22,11 @@ const Login: React.FC<any> = (props) => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <div><Field name={'login'} type={'text'} component={"input"}/></div>
-            <div><Field name={'password'} type={'password'} component={"input"}/></div>
-            <div><Field name={'rememberMe'} type={'checkbox'} component={"input"}/></div>
+            <div><Field validate={[required]} name={'login'} type={'text'} component={Input}/></div>
+            <div><Field validate={[required]} name={'password'} type={'password'} component={Input}/></div>
+            <div><Field name={'rememberMe'} type={'checkbox'} component={"input"}/>Remember me</div>
             <div>
-                <button onClick={()=> {}}>login</button>
+                <button>login</button>
             </div>
         </form>)
 }
