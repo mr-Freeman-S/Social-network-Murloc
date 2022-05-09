@@ -8,13 +8,15 @@ export type HeaderPropsType = {
     login:string | null
     isAuthorized: boolean
     isFetching: boolean
+    logoutThunk:()=>void
+
 }
 const Header = (props:HeaderPropsType) => {
     return (
         <header className={style.header}>
             <div><img src={logo} alt='logo' />World of Geek</div>
             <div className={style.loginBlock}>
-                {props.isFetching ? <CircularProgress size={50}/> : props.isAuthorized ? <div>{props.login}</div> :<NavLink to={'/auth'}>LOGIN</NavLink>}
+                {props.isFetching ? <CircularProgress size={50}/> : props.isAuthorized ? <div>{props.login} | <button onClick={props.logoutThunk} >logout</button></div> :<NavLink to={'/login'}>LOGIN</NavLink>}
 
             </div>
         </header>

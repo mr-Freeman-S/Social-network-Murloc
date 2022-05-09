@@ -30,3 +30,10 @@ export const getStatus = (userID: number) => {
 export const updateStatus = (status: string) => {
     return instance.put(`profile/status`, {status}).then(response => response.data)
 }
+
+export const login = (email: string, password: string, rememberMe: boolean) => {
+    return instance.post(`auth/login`, {email, password, rememberMe}).then(response => response.data)
+}
+export const logout = () => {
+    return instance.delete(`auth/login`).then(response => response.data)
+}

@@ -1,11 +1,12 @@
 import React from "react";
 import Header from "./Header";
 import {AppStateType} from "../../redux/redux-store";
-import {authMeThunk} from "../../redux/auth-reducer";
+import {authMeThunk, logoutThunk} from "../../redux/auth-reducer";
 import {connect} from "react-redux";
 
 type ContainerHeaderPropsType = mapStateToPropsType &{
     authMeThunk:()=>void
+    logoutThunk:()=>void
 }
 
 class ContainerHeader extends React.Component<ContainerHeaderPropsType, any> {
@@ -16,6 +17,7 @@ class ContainerHeader extends React.Component<ContainerHeaderPropsType, any> {
 
     render() {
         return <Header
+            logoutThunk={this.props.logoutThunk}
             isAuthorized={this.props.isAuthorized}
             login={this.props.login}
             isFetching={this.props.isFetching}
@@ -33,4 +35,4 @@ const mapStateToProps = (state: AppStateType):mapStateToPropsType => ({
     isFetching: state.auth.isFetching
 })
 
-export default connect(mapStateToProps, {authMeThunk})(ContainerHeader)
+export default connect(mapStateToProps, {authMeThunk, logoutThunk})(ContainerHeader)
