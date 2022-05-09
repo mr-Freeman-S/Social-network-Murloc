@@ -1,5 +1,6 @@
 import {Dispatch} from "redux";
 import {getAuthMe, login, logout} from "../api/api";
+import {stopSubmit} from "redux-form";
 
 const SET_USER_DATA = 'SET_USER_DATA'
 const SET_FETCHING = 'SET_FETCHING'
@@ -52,21 +53,22 @@ export const authMeThunk = () => (dispatch: Dispatch) => {
                 dispatch(setAuthUserDataAC(data.data,true))
             }
             dispatch(setFetchingAC(false))
-
         }
     )
 }
 export const loginThunk = (email: string, password: string, rememberMe: boolean) => (dispatch: any) => {
-    dispatch(setFetchingAC(true))
     login(email, password, rememberMe).then(data => {
         if (data.resultCode === 0) {
             dispatch(authMeThunk())
+        }else {
+
+            let message = data.messages.length > 0 ? data.messages[0]: "Some error"
+            dispatch(stopSubmit('login',{_error:message}))
+            debugger
         }
     })
-    dispatch(setFetchingAC(false))
 }
 export const logoutThunk = () => (dispatch: any) => {
-    dispatch(setFetchingAC(true))
     logout().then(data => {
         if (data.resultCode === 0) {
             dispatch(authMeThunk())
@@ -76,6 +78,5 @@ export const logoutThunk = () => (dispatch: any) => {
             },false))
         }
     })
-    dispatch(setFetchingAC(false))
 }
 export default authReducer;

@@ -4,6 +4,7 @@ import {Input} from "../common/FormsControls/FormControls";
 import {required} from "../../untils/validators";
 import {loginThunk} from "../../redux/auth-reducer";
 import {connect} from "react-redux";
+import {RootStateType} from "../../redux/store";
 
 export type LoginValueType = {
     email:string
@@ -34,6 +35,9 @@ const Login: React.FC<any> = (props) => {
             <div><Field validate={[required]} name={'email'} type={'text'} component={Input}/></div>
             <div><Field validate={[required]} name={'password'} type={'password'} component={Input}/></div>
             <div><Field name={'rememberMe'} type={'checkbox'} component={"input"}/>Remember me</div>
+            <div>
+                {props.error}
+            </div>
             <div>
                 <button>login</button>
             </div>
