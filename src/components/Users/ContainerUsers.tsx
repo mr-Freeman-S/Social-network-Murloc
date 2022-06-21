@@ -9,6 +9,14 @@ import {
     toggleIsFollowing,
     userType
 } from "../../redux/user-reducer";
+import {
+    getCurrentPage,
+    getFollowIsProgress,
+    getIsLoading,
+    getPageSize,
+    getTotalUsers,
+    getUsers
+} from "../../redux/user-selectors";
 
 
 class UsersContainer extends React.Component<UsersContainerType> {
@@ -58,12 +66,12 @@ export type UsersContainerType = mapStateToPropsType & mapDispatchToPropsType
 
 const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     return {
-        usersData: state.userPage.users,
-        totalUsers: state.userPage.totalUsersCount,
-        currentPage: state.userPage.currentPage,
-        pageSize: state.userPage.pageSize,
-        isLoading: state.userPage.isLoading,
-        followIsProgress: state.userPage.followIsProgress
+        usersData: getUsers(state),
+        totalUsers: getTotalUsers(state),
+        currentPage: getCurrentPage(state),
+        pageSize: getPageSize(state),
+        isLoading: getIsLoading(state),
+        followIsProgress: getFollowIsProgress(state)
     }
 }
 

@@ -4,18 +4,17 @@ import {Input} from "../common/FormsControls/FormControls";
 import {required} from "../../untils/validators";
 import {loginThunk} from "../../redux/auth-reducer";
 import {connect} from "react-redux";
-import {RootStateType} from "../../redux/store";
 
 export type LoginValueType = {
-    email:string
-    password:string
-    rememberMe:boolean
+    email: string
+    password: string
+    rememberMe: boolean
 }
 
 
-const LoginPage = (props:any) => {
-    const submit = (value:any) => {
-        props.loginThunk(value.email,value.password,value.rememberMe)
+const LoginPage = (props: any) => {
+    const submit = (value: any) => {
+        props.loginThunk(value.email, value.password, value.rememberMe)
     }
     return (
         <div>
@@ -45,4 +44,4 @@ const Login: React.FC<any> = (props) => {
 }
 const WithReduxFormLogin = reduxForm({form: 'login'})(Login)
 
-export default connect(null,{loginThunk})(LoginPage);
+export default connect(null, {loginThunk})(LoginPage);

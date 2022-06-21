@@ -14,7 +14,7 @@ export type authInitialStateType = {
     isAuthorized: boolean
 }
 
-let initialState: authInitialStateType = {
+const initialState: authInitialStateType = {
     "id": null,
     "login": null,
     "email": null,
@@ -42,7 +42,11 @@ export type userAuthData = {
     "email": null | string
 }
 export const setFetchingAC = (isFetching: boolean) => ({type: SET_FETCHING, isFetching} as const)
-export const setAuthUserDataAC = (userData: userAuthData,isAuth:boolean) => ({type: SET_USER_DATA, userData,isAuth} as const)
+export const setAuthUserDataAC = (userData: userAuthData, isAuth: boolean) => ({
+    type: SET_USER_DATA,
+    userData,
+    isAuth
+} as const)
 
 
 export const authMeThunk = () => (dispatch: Dispatch) => {
@@ -50,7 +54,7 @@ export const authMeThunk = () => (dispatch: Dispatch) => {
     getAuthMe().then(
         data => {
             if (data.resultCode === 0) {
-                dispatch(setAuthUserDataAC(data.data,true))
+                dispatch(setAuthUserDataAC(data.data, true))
             }
             dispatch(setFetchingAC(false))
         }
@@ -60,11 +64,10 @@ export const loginThunk = (email: string, password: string, rememberMe: boolean)
     login(email, password, rememberMe).then(data => {
         if (data.resultCode === 0) {
             dispatch(authMeThunk())
-        }else {
+        } else {
 
-            let message = data.messages.length > 0 ? data.messages[0]: "Some error"
-            dispatch(stopSubmit('login',{_error:message}))
-            debugger
+            let message = data.messages.length > 0 ? data.messages[0] : "Some error"
+            dispatch(stopSubmit('login', {_error: message}))
         }
     })
 }
@@ -75,7 +78,7 @@ export const logoutThunk = () => (dispatch: any) => {
             dispatch(setAuthUserDataAC({
                 "id": null, "login": null,
                 "email": null
-            },false))
+            }, false))
         }
     })
 }

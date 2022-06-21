@@ -1,9 +1,9 @@
 import {SidebarType} from "./store";
-import faceMaks from "./face_photo/erik-lucatero-d2MSDujJl2g-unsplash.jpg";
-import faceKate from "./face_photo/omid-armin-xOjzehJ49Hk-unsplash.jpg";
-import faceSveta from "./face_photo/michael-dam-mEZ3PoFGs_k-unsplash.jpg";
+import faceMaks from "./../assets/face_photo/michael-dam-mEZ3PoFGs_k-unsplash.jpg";
+import faceKate from "./../assets/face_photo/nico-marks-763-mBawsfg-unsplash.jpg";
+import faceSveta from "./../assets/face_photo/omid-armin-xOjzehJ49Hk-unsplash.jpg";
 
-let initialState = {
+const initialState = {
     friends: [
         {name: 'Maks', img: faceMaks},
         {name: 'Kate', img: faceKate},
