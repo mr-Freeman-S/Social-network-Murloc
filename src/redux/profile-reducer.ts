@@ -1,10 +1,8 @@
 import {v1} from "uuid";
-import {ChangeEvent} from "react";
 import {Dispatch} from "redux";
 import {getProfile, getStatus, updateStatus} from "../api/api";
 
 const ADD_POST = 'ADD-POST'
-const CHANGE_POST = "CHANGE-NEW-POST"
 const CHANGE_PROFILE = "CHANGE_PROFILE"
 const SET_STATUS = 'SET_STATUS'
 
@@ -38,7 +36,7 @@ export type ProfileType = {
 type initialStateType = {
     profile: null | ProfileType
     postData: Array<postType>
-    status:string
+    status: string
 }
 
 let initialState: initialStateType = {
@@ -61,23 +59,23 @@ const profileReducer = (state: initialStateType = initialState, action: ActionsT
         case CHANGE_PROFILE:
             return {...state, profile: action.profile}
         case SET_STATUS:
-            return {...state,status:action.setStatus}
+            return {...state, status: action.status}
         default:
             return state
     }
 }
-type ActionsTypes = addNewPostACType  | setUserProfileType | setStatusType
+type ActionsTypes = addNewPostACType | setUserProfileType | setStatusType
 export type addNewPostACType = ReturnType<typeof addNewPostAC>
 export type setUserProfileType = ReturnType<typeof setUserProfile>
 export type setStatusType = ReturnType<typeof setStatus>
 
-export const setStatus = (status:string) => ({type:SET_STATUS, setStatus:status} as const)
-export const addNewPostAC = (newPost:string) => ({type: ADD_POST,newPost} as const)
+export const setStatus = (status: string) => ({type: SET_STATUS, status} as const)
+export const addNewPostAC = (newPost: string) => ({type: ADD_POST, newPost} as const)
 
 export const setUserProfile = (profile: ProfileType) =>
     ({type: CHANGE_PROFILE, profile} as const)
 //thunks
-export const getProfileThunk = (userID:number) => (dispatch:Dispatch)=>{
+export const getProfileThunk = (userID: number) => (dispatch: Dispatch) => {
     if (!userID) {
         userID = 23091
     }
@@ -85,14 +83,15 @@ export const getProfileThunk = (userID:number) => (dispatch:Dispatch)=>{
         dispatch(setUserProfile(data))
     })
 }
-export const getStatusThunk = (userID:number) => (dispatch:Dispatch)=> {
-    getStatus(userID).then(status =>
-    dispatch(setStatus(status)))
-}
-export const updateStatusThunk = (status:string)=> (dispatch:Dispatch)=> {
-    updateStatus(status).then(response => {
-        if (response.resultCode === 0){
+export const getStatusThunk = (userID: number) => (dispatch: Dispatch) => {
+    getStatus(userID).then(status => {
         dispatch(setStatus(status))
+    })
+}
+export const updateStatusThunk = (status: string) => (dispatch: Dispatch) => {
+    updateStatus(status).then(response => {
+        if (response.resultCode === 0) {
+            dispatch(setStatus(status))
         }
     })
 }
