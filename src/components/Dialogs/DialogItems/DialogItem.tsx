@@ -4,18 +4,18 @@ import style from "../Dialogs.module.css";
 
 type DialogsPropsType = {}
 
-const DialogItem = (props:DialogsPropsType) => {
+const DialogItem = (props: DialogsPropsType) => {
     //let userDialogs = props.dataUsers.map(user => <Dialog id={user.id} name={user.name} img={user.img}/>)
     return (
-            <div className={style.dialogsItems}>
-                {/*{userDialogs}*/}
-                <ul>
-                    <li>Slava</li>
-                    <li>Sveta</li>
-                    <li>Maks</li>
-                    <li>Roma</li>
-                </ul>
-            </div>
+        <div className={style.dialogsItems}>
+            {/*{userDialogs}*/}
+            <ul>
+                <li>Slava</li>
+                <li>Sveta</li>
+                <li>Maks</li>
+                <li>Roma</li>
+            </ul>
+        </div>
     );
 };
 

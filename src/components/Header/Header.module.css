@@ -20,10 +20,12 @@
     font-size: 2em;
     color: #f9ba32;
 }
+
 .loginBlock {
     justify-self: end;
-   right: 100px;
+    right: 100px;
 }
+
 .loginBlock div {
     font-size: 1em;
     right: 100px;

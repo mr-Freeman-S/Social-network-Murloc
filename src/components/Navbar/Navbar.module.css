@@ -1,19 +1,19 @@
 .nav {
-  grid-area: n;
-  background-color: #426e86;
-  padding: 30px;
-  border-radius: 2em;
+    grid-area: n;
+    background-color: #426e86;
+    padding: 30px;
+    border-radius: 2em;
 }
 
 .navItem {
-  color: #2f3131;
-  text-decoration: none;
-  font-size: 1.5em;
+    color: #2f3131;
+    text-decoration: none;
+    font-size: 1.5em;
 
 
 }
 
 img {
-  height: 1em;
-  margin-right: 10px;
+    height: 1em;
+    margin-right: 10px;
 }

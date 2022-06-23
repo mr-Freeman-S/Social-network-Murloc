@@ -7,8 +7,9 @@ import AddMessageFormRedux from "./AddMessageForm";
 const Messages = (props: MessagesPropsType) => {
     let userMessages = props.data.map(m => <div className={style.messages}>{m.message}</div>)
 
-    const submit = (value:any)=> {
-props.addNewMessage(value.newMessageBody)    }
+    const submit = (value: any) => {
+        props.addNewMessage(value.newMessageBody)
+    }
     return (
         <div className={style.messages}>
             {userMessages}

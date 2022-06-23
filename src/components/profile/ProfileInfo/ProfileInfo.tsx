@@ -1,20 +1,20 @@
 import React from "react";
-import userIcon from './pngwing1.png'
+import userIcon from '../../../assets/pngwing1.png'
 import style from './ProfileInfo.module.css'
 import {ProfileType} from "../../../redux/profile-reducer";
 import StatusText from "./StatusText";
 
 type ProfileInfoPropsType = {
     profileInfo: ProfileType | null
-    status:string
-    updateStatus:(status:string)=>void
+    status: string
+    updateStatus: (status: string) => void
 }
 
 const ProfileInfo = (props: ProfileInfoPropsType) => {
     return (
         <div className={style.content}>
             <div><h1>{props.profileInfo?.fullName}</h1>
-            <StatusText status={props.status} updateStatus={props.updateStatus} />
+                <StatusText status={props.status} updateStatus={props.updateStatus}/>
 
                 <div className={style.profileInf}>{props.profileInfo?.aboutMe}</div>
                 <div className={style.profileInf}>

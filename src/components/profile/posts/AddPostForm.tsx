@@ -9,7 +9,8 @@ const AddPost = (props: any) => {
     const {handleSubmit} = props
     return (
         <form onSubmit={handleSubmit}>
-            <Field component={Textarea} validate={[required,maxLengthPost]} name={"newPostForm"} placeholder={"add new post"}/>
+            <Field component={Textarea} validate={[required, maxLengthPost]} name={"newPostForm"}
+                   placeholder={"add new post"}/>
             <div>
                 <button>add post</button>
             </div>

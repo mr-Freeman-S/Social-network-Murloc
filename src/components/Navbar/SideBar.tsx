@@ -1,7 +1,6 @@
 import React from 'react';
 
 
-
 const SideBar = () => {
 // example style object
     const wrapper = {

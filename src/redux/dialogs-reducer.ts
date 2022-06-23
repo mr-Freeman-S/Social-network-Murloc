@@ -41,8 +41,8 @@ const dialogsReducer = (state: InitialStateType = initialState, action: allActio
                 ...state,
                 messagesData: [...state.messagesData, newMessage],
             }
-/*        case CHANGE_MESSAGE:
-            return {...state, newMessageText: action.payload.event.currentTarget.value}*/
+        /*        case CHANGE_MESSAGE:
+                    return {...state, newMessageText: action.payload.event.currentTarget.value}*/
         default:
             return state
     }
@@ -56,7 +56,7 @@ export type allActionsType = changeNewMessageACType | addNewMessageACType
 export type addNewMessageACType = ReturnType<typeof addNewMessageAC>
 export type changeNewMessageACType = ReturnType<typeof changeNewMessageAC>
 
-export const addNewMessageAC = (newMessageBody:string) => ({type: ADD_MESSAGE , newMessageBody} as const)
+export const addNewMessageAC = (newMessageBody: string) => ({type: ADD_MESSAGE, newMessageBody} as const)
 export const changeNewMessageAC = (e: ChangeEvent<HTMLTextAreaElement>) => {
     return {
         type: CHANGE_MESSAGE,

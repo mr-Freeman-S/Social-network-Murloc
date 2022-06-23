@@ -3,7 +3,6 @@ import {dialogsType, messageType} from "./dialogs-reducer";
 import {postType} from "./profile-reducer";
 
 
-
 export type profilePageType = {
     postData: Array<postType>
     newPost: string

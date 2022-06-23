@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, useEffect, useState} from 'react';
 
 type StatusTextType = {
     status: string
@@ -9,6 +9,10 @@ const StatusText: React.FC<StatusTextType> = ({status, updateStatus}) => {
 
     const [editToggle, setEditToggle] = useState(false)
     const [valueStatus, setValueStatus] = useState(status)
+
+    useEffect(() => {
+        setValueStatus(status)
+    }, [status])
 
     const onDoubleClickHandler = () => {
         setEditToggle(true)
