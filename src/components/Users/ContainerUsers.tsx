@@ -14,8 +14,7 @@ import {
     getFollowIsProgress,
     getIsLoading,
     getPageSize,
-    getTotalUsers,
-    getUsers
+    getTotalUsers, getUsers,
 } from "../../redux/user-selectors";
 
 

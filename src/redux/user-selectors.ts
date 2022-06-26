@@ -1,9 +1,14 @@
 import {AppStateType} from "./redux-store";
+import {createSelector} from "reselect";
+import {userType} from "./user-reducer";
 
-export const getUsers = (state: AppStateType) => {
+ const getUsersSelector = (state: AppStateType): userType[] => {
     return state.userPage.users
-
 }
+// add reselect for learn, use fake filter
+export const getUsers = createSelector(getUsersSelector,(users: userType[]) => {
+    return users.filter(() => true)
+})
 export const getTotalUsers = (state: AppStateType) => {
     return state.userPage.totalUsersCount
 
