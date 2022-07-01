@@ -1,10 +1,12 @@
 import {v1} from "uuid";
 import {Dispatch} from "redux";
 import {getProfile, getStatus, updateStatus} from "../api/api";
+import {allTypeReducer} from "./user-reducer";
 
 const ADD_POST = 'ADD-POST'
 const CHANGE_PROFILE = "CHANGE_PROFILE"
 const SET_STATUS = 'SET_STATUS'
+const DELETE_POST = 'DELETE_POST'
 
 export type postType = {
     id: string
@@ -33,13 +35,13 @@ export type ProfileType = {
         "large": null | string
     }
 }
-type initialStateType = {
+export type initialProfileStateType = {
     profile: null | ProfileType
     postData: Array<postType>
     status: string
 }
 
-let initialState: initialStateType = {
+let initialState: initialProfileStateType = {
     profile: null,
     postData: [
         {id: v1(), post: "Hi. My name is Slava", likeCount: 3},
@@ -50,7 +52,7 @@ let initialState: initialStateType = {
     status: ''
 }
 
-const profileReducer = (state: initialStateType = initialState, action: ActionsTypes): initialStateType => {
+const profileReducer = (state: initialProfileStateType = initialState, action: ActionsTypes): initialProfileStateType => {
     switch (action.type) {
         case ADD_POST:
             const newPost: postType = {id: v1(), post: action.newPost, likeCount: 0}
@@ -60,17 +62,21 @@ const profileReducer = (state: initialStateType = initialState, action: ActionsT
             return {...state, profile: action.profile}
         case SET_STATUS:
             return {...state, status: action.status}
+        case DELETE_POST:
+            return {...state, postData: state.postData.filter(el => el.id !== action.id)}
         default:
             return state
     }
 }
-type ActionsTypes = addNewPostACType | setUserProfileType | setStatusType
+type ActionsTypes = addNewPostACType | setUserProfileType | setStatusType | deletePostType
 export type addNewPostACType = ReturnType<typeof addNewPostAC>
 export type setUserProfileType = ReturnType<typeof setUserProfile>
 export type setStatusType = ReturnType<typeof setStatus>
+export type deletePostType = ReturnType<typeof deletePostAC>
 
 export const setStatus = (status: string) => ({type: SET_STATUS, status} as const)
 export const addNewPostAC = (newPost: string) => ({type: ADD_POST, newPost} as const)
+export const deletePostAC = (id: string) => ({type: DELETE_POST, id} as const)
 
 export const setUserProfile = (profile: ProfileType) =>
     ({type: CHANGE_PROFILE, profile} as const)

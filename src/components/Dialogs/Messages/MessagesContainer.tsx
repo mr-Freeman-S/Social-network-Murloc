@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from 'react';
+import  {ChangeEvent} from 'react';
 import {addNewMessageAC, changeNewMessageAC, messageType,} from "../../../redux/dialogs-reducer";
 import Messages from "./Messages";
 import {connect} from "react-redux";

@@ -10,6 +10,8 @@ type PostsPropsType = {
 }
 
 const Posts = (props: PostsPropsType) => {
+    console.log("RENDER")
+    console.log(props)
     let userPosts = props.postData.map(post => <Post {...post} />)
 
 
