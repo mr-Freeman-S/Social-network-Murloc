@@ -1,7 +1,6 @@
 import {v1} from "uuid";
 import {Dispatch} from "redux";
 import {getProfile, getStatus, updateStatus} from "../api/api";
-import {allTypeReducer} from "./user-reducer";
 
 const ADD_POST = 'ADD-POST'
 const CHANGE_PROFILE = "CHANGE_PROFILE"

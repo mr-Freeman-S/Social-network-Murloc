@@ -1,8 +1,7 @@
 import profileReducer, {
     addNewPostAC,
     deletePostAC,
-    initialProfileStateType,
-    ProfileType, setStatus,
+    initialProfileStateType, setStatus,
     setUserProfile
 } from "./profile-reducer";
 import {v1} from "uuid";
