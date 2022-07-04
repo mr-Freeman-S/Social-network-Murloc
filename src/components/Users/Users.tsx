@@ -27,8 +27,6 @@ const Users = (props: UsersPropsType) => {
     const onChangeHandler = (event: React.ChangeEvent<unknown>, page: number) =>
         props.onChangeCurrentPage(page)
     const followUnfollowHandler = (followed: boolean, id: number) => {
-        console.log(props.followIsProgress)
-        props.toggleIsFollowing(id, true)
         followed ? props.followUnfollowThunk("delete", id)
             : props.followUnfollowThunk("post", id)
     }

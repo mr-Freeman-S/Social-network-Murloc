@@ -2,8 +2,8 @@ import {Dispatch} from "redux";
 import {getAuthMe, login, logout} from "../api/api";
 import {stopSubmit} from "redux-form";
 
-const SET_USER_DATA = 'SET_USER_DATA'
-const SET_FETCHING = 'SET_FETCHING'
+const SET_USER_DATA = 'auth/SET_USER_DATA'
+const SET_FETCHING = 'auth/SET_FETCHING'
 
 
 export type authInitialStateType = {
@@ -49,37 +49,34 @@ export const setAuthUserDataAC = (userData: userAuthData, isAuth: boolean) => ({
 } as const)
 
 
-export const authMeThunk = () => (dispatch: Dispatch) => {
+export const authMeThunk = () =>async (dispatch: Dispatch) => {
     dispatch(setFetchingAC(true))
-    getAuthMe().then(
-        data => {
-            if (data.resultCode === 0) {
-                dispatch(setAuthUserDataAC(data.data, true))
+       const response = await getAuthMe()
+            if (response.resultCode === 0) {
+                dispatch(setAuthUserDataAC(response.data, true))
             }
             dispatch(setFetchingAC(false))
         }
-    )
-}
-export const loginThunk = (email: string, password: string, rememberMe: boolean) => (dispatch: any) => {
-    login(email, password, rememberMe).then(data => {
-        if (data.resultCode === 0) {
+
+
+export const loginThunk = (email: string, password: string, rememberMe: boolean) => async (dispatch: any) => {
+   const response = await login(email, password, rememberMe)
+        if (response.resultCode === 0) {
             dispatch(authMeThunk())
         } else {
 
-            let message = data.messages.length > 0 ? data.messages[0] : "Some error"
+            let message = response.messages.length > 0 ? response.messages[0] : "Some error"
             dispatch(stopSubmit('login', {_error: message}))
         }
-    })
-}
-export const logoutThunk = () => (dispatch: any) => {
-    logout().then(data => {
-        if (data.resultCode === 0) {
+    }
+export const logoutThunk = () =>async (dispatch: any) => {
+   const response = await logout()
+        if (response.resultCode === 0) {
             dispatch(authMeThunk())
             dispatch(setAuthUserDataAC({
                 "id": null, "login": null,
                 "email": null
             }, false))
         }
-    })
 }
 export default authReducer;

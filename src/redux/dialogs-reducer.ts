@@ -48,8 +48,8 @@ const dialogsReducer = (state: InitialStateType = initialState, action: allActio
     }
 }
 
-const ADD_MESSAGE = "ADD-NEW-MESSAGE"
-const CHANGE_MESSAGE = "CHANGE-NEW-MESSAGE"
+const ADD_MESSAGE = "dialogs/ADD-NEW-MESSAGE"
+const CHANGE_MESSAGE = "dialogs/CHANGE-NEW-MESSAGE"
 
 export type allActionsType = changeNewMessageACType | addNewMessageACType
 

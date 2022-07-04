@@ -1,13 +1,14 @@
 import {
-    followAC, setCurrentPageAC,
+    followAC,
+    setCurrentPageAC,
     setTotalUsersCount,
-    setUsers, toggleIsFollowing,
+    setUsers,
+    toggleIsFollowing,
     toggleIsLoading,
     unfollowAC,
     userReducer,
     userType
 } from "../user-reducer";
-import exp from "constants";
 
 const user1 = <userType>{
     name: "slava",

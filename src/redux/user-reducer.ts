@@ -1,5 +1,6 @@
 import {followOrUser, getUsersAPI} from "../api/api";
 import {Dispatch} from "redux";
+import {updateObjectInArray} from "../untils/object-helpers";
 
 export type userType = {
     "name": string,
@@ -36,15 +37,9 @@ export const userReducer = (state: initialStateType = initialState, action: allT
     switch (action.type) {
         case FOLLOW:
 
-            return {
-                ...state,
-                users: state.users.map(el => el.id === action.payload.userID ? {...el, followed: !el.followed} : el)
-            }
+            return{...state,users: updateObjectInArray(state.users,action.payload.userID,"id",{followed:true})}
         case UNFOLLOW:
-            return {
-                ...state,
-                users: state.users.map(el => el.id === action.payload.userID ? {...el, followed: false} : el)
-            }
+            return{...state,users: updateObjectInArray(state.users,action.payload.userID,"id",{followed:false})}
         case TOGGLE_FOLLOW_IS_PROGRESS:
             return {
                 ...state,
@@ -80,13 +75,13 @@ export type setCurrentPageACType = ReturnType<typeof setCurrentPageAC>
 export type toggleIsLoadingType = ReturnType<typeof toggleIsLoading>
 export type toggleIsFollowingType = ReturnType<typeof toggleIsFollowing>
 
-const FOLLOW = "FOLLOW"
-const UNFOLLOW = 'UNFOLLOW'
-const USERS_SET = 'USERS_SET'
-const SET_TOTAL_USERS_COUNT = "SET_TOTAL_USERS_COUNT"
-const SET_CURRENT_PAGE = "SET_CURRENT_PAGE"
-const TOGGLE_IS_LOADING = "TOGGLE_IS_LOADING"
-const TOGGLE_FOLLOW_IS_PROGRESS = 'TOGGLE_FOLLOW_IS_PROGRESS'
+const FOLLOW = "user/FOLLOW"
+const UNFOLLOW = 'user/UNFOLLOW'
+const USERS_SET = 'user/USERS_SET'
+const SET_TOTAL_USERS_COUNT = "user/SET_TOTAL_USERS_COUNT"
+const SET_CURRENT_PAGE = "user/SET_CURRENT_PAGE"
+const TOGGLE_IS_LOADING = "user/TOGGLE_IS_LOADING"
+const TOGGLE_FOLLOW_IS_PROGRESS = 'user/TOGGLE_FOLLOW_IS_PROGRESS'
 
 export const followAC = (userID: number) => {
     return {type: FOLLOW, payload: {userID: userID} as const} as const
@@ -110,29 +105,26 @@ export const toggleIsFollowing = (id: number, isFetching: boolean) => {
     return {type: TOGGLE_FOLLOW_IS_PROGRESS, payload: {id, isFetching}} as const
 }
 
-export const getUsersThunkCreator = (pageSize: number, currentPage: number) => (dispatch: Dispatch) => {
+export const getUsersThunkCreator = (pageSize: number, currentPage: number) => async (dispatch: Dispatch) => {
     dispatch(toggleIsLoading(true))
-    getUsersAPI(pageSize, currentPage).then(data => {
-        dispatch(toggleIsLoading(false))
-        dispatch(setUsers(data.items));
-        dispatch(setTotalUsersCount(data.totalCount))
-    })
+    const response = await getUsersAPI(pageSize, currentPage)
+    dispatch(toggleIsLoading(false))
+    dispatch(setUsers(response.items));
+    dispatch(setTotalUsersCount(response.totalCount))
+
 }
-export const getUsersCurrentPage = (valuePage: number, pageSize: number) => (dispatch: Dispatch) => {
+export const getUsersCurrentPage = (valuePage: number, pageSize: number) => async (dispatch: Dispatch) => {
     dispatch(setCurrentPageAC(valuePage))
     dispatch(toggleIsLoading(true))
-    getUsersAPI(pageSize, valuePage).then(data => {
-        dispatch(toggleIsLoading(false))
-        dispatch(setUsers(data.items))
-    })
+    const response = await getUsersAPI(pageSize, valuePage)
+    dispatch(toggleIsLoading(false))
+    dispatch(setUsers(response.items))
 }
-export const followUnfollowThunk = (action: "post" | "delete", userID: number) => (dispatch: Dispatch) => {
-    followOrUser(action, userID).then(data => {
-        if (data.resultCode === 0) {
-            dispatch(followAC(userID))
-            dispatch(toggleIsFollowing(userID, false))
-
-        }
-    })
+export const followUnfollowThunk = (action: "post" | "delete", userID: number) => async (dispatch: Dispatch) => {
+    const response = await followOrUser(action, userID)
+    if (response.resultCode === 0) {
+        dispatch(followAC(userID))
+        dispatch(toggleIsFollowing(userID, false))
+    }
 }
 

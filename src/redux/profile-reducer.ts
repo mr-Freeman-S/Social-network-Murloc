@@ -1,6 +1,7 @@
 import {v1} from "uuid";
 import {Dispatch} from "redux";
 import {getProfile, getStatus, updateStatus} from "../api/api";
+import {AppStateType} from "./redux-store";
 
 const ADD_POST = 'ADD-POST'
 const CHANGE_PROFILE = "CHANGE_PROFILE"
@@ -80,25 +81,23 @@ export const deletePostAC = (id: string) => ({type: DELETE_POST, id} as const)
 export const setUserProfile = (profile: ProfileType) =>
     ({type: CHANGE_PROFILE, profile} as const)
 //thunks
-export const getProfileThunk = (userID: number) => (dispatch: Dispatch) => {
+export const getProfileThunk = (userID: number) => async (dispatch: Dispatch, getState: () => AppStateType) => {
     if (!userID) {
-        userID = 23091
+        // @ts-ignore
+        userID = getState().auth.id
     }
-    getProfile(userID).then(data => {
-        dispatch(setUserProfile(data))
-    })
+    const response = await getProfile(userID)
+    dispatch(setUserProfile(response))
 }
-export const getStatusThunk = (userID: number) => (dispatch: Dispatch) => {
-    getStatus(userID).then(status => {
+export const getStatusThunk = (userID: number) => async (dispatch: Dispatch) => {
+    const response = await getStatus(userID)
+    dispatch(setStatus(response))
+}
+export const updateStatusThunk = (status: string) => async (dispatch: Dispatch) => {
+    const response = await updateStatus(status)
+    if (response.resultCode === 0) {
         dispatch(setStatus(status))
-    })
-}
-export const updateStatusThunk = (status: string) => (dispatch: Dispatch) => {
-    updateStatus(status).then(response => {
-        if (response.resultCode === 0) {
-            dispatch(setStatus(status))
-        }
-    })
+    }
 }
 
 export default profileReducer;
