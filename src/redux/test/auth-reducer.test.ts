@@ -6,7 +6,6 @@ const state: authInitialStateType = {
     "email": null,
     isAuthorized: false,
     isFetching: true
-
 }
 it('should set user data', function () {
     //1.DATA
@@ -20,7 +19,7 @@ it('should set user data', function () {
 });
 it('should change isFetching on false', function () {
     //1.DATA
-    let action = setFetchingAC( false)
+    let action = setFetchingAC(false)
     //2.Action
     let newState = authReducer(state, action)
     //3.Expect

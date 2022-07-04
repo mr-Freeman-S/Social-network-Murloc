@@ -56,7 +56,7 @@ export const userReducer = (state: initialStateType = initialState, action: allT
         case TOGGLE_IS_LOADING:
         case SET_TOTAL_USERS_COUNT:
         case SET_CURRENT_PAGE:
-        case USERSSET:
+        case USERS_SET:
             return {...state, ...action.payload}
 
         default:
@@ -82,7 +82,7 @@ export type toggleIsFollowingType = ReturnType<typeof toggleIsFollowing>
 
 const FOLLOW = "FOLLOW"
 const UNFOLLOW = 'UNFOLLOW'
-const USERSSET = 'USERSSET'
+const USERS_SET = 'USERS_SET'
 const SET_TOTAL_USERS_COUNT = "SET_TOTAL_USERS_COUNT"
 const SET_CURRENT_PAGE = "SET_CURRENT_PAGE"
 const TOGGLE_IS_LOADING = "TOGGLE_IS_LOADING"
@@ -95,7 +95,7 @@ export const unfollowAC = (userID: number) => {
     return {type: UNFOLLOW, payload: {userID: userID} as const} as const
 }
 export const setUsers = (users: userType[]) => {
-    return {type: USERSSET, payload: {users: users}} as const
+    return {type: USERS_SET, payload: {users: users}} as const
 }
 export const setTotalUsersCount = (TotalUsers: number) => {
     return {type: SET_TOTAL_USERS_COUNT, payload: {totalUsersCount: TotalUsers}} as const
