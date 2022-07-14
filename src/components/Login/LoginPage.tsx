@@ -1,5 +1,5 @@
-import React from 'react';
-import {Field, reduxForm} from "redux-form";
+import React, {FormEventHandler} from 'react';
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {Input} from "../common/FormsControls/FormControls";
 import {required} from "../../untils/validators";
 import {loginThunk} from "../../redux/auth-reducer";
@@ -10,9 +10,21 @@ export type LoginValueType = {
     password: string
     rememberMe: boolean
 }
+type SubmitValueType = {
+    email: string
+    password: string
+    rememberMe: boolean
+}
 
+type LoginFormPropsType = {
+    handleSubmit: FormEventHandler<HTMLFormElement>
+    error: string
+}
+type LoginPagePropsType = {
+    loginThunk: (email: string, password: string, rememberMe: boolean) => void
+}
 
-const LoginPage = (props: any) => {
+const LoginPage = (props: LoginPagePropsType) => {
     const submit = (value: any) => {
         props.loginThunk(value.email, value.password, value.rememberMe)
     }
@@ -25,10 +37,8 @@ const LoginPage = (props: any) => {
 };
 
 
-const Login: React.FC<any> = (props) => {
+const LoginForm: React.FC<InjectedFormProps> = (props) => {
     const {handleSubmit} = props
-
-
     return (
         <form onSubmit={handleSubmit}>
             <div><Field validate={[required]} name={'email'} type={'text'} component={Input}/></div>
@@ -42,6 +52,6 @@ const Login: React.FC<any> = (props) => {
             </div>
         </form>)
 }
-const WithReduxFormLogin = reduxForm({form: 'login'})(Login)
+const WithReduxFormLogin = reduxForm({form: 'login'})(LoginForm)
 
 export default connect(null, {loginThunk})(LoginPage);
