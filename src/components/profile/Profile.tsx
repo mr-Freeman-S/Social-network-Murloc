@@ -15,6 +15,7 @@ const Profile = (props: profilePropsType) => {
         <div>
             <ProfileInfo status={props.status} updateStatus={props.updateStatus} profileInfo={props.profileInfo}/>
             <PostsContainer/>
+
         </div>
     );
 }

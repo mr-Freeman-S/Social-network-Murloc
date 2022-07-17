@@ -18,7 +18,7 @@ export type UsersPropsType = {
     followUnfollowThunk: (action: "post" | "delete", userID: number) => void
 }
 
-const Users = (props: UsersPropsType) => {
+const Users: React.FC<UsersPropsType> = (props) => {
     const pagesCount = Math.ceil(props.totalUsers / props.pageSize)
     const pages = []
     for (let i = 1; i <= pagesCount; i++) {

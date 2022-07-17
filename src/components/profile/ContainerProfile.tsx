@@ -9,34 +9,47 @@ import {
     setUserProfile,
     updateStatusThunk
 } from "../../redux/profile-reducer";
-import {withRouter} from "../Users/withRouter";
+import {withRouter} from "../../hoc/withRouter";
 import {withAuthRedirect} from "../../hoc/wuthAuthRedirect";
 import {compose} from "redux";
 
-type mapStateToPropsType = {
+export type userMapStateToPropsType = {
     profileInfo: ProfileType | null
     isAuth: boolean
     status: string
     authUserID: number | null
 }
-type mapDispatchToPropsType = {
+export type userMapDispatchToPropsType = {
     setUserProfile: (profile: ProfileType) => void
     getProfileThunk: (userID: number) => void
     getStatusThunk: (userID: string) => void
     updateStatusThunk: (status: string) => void
 }
-type ContainerProfileType = mapStateToPropsType & mapDispatchToPropsType
+type ContainerProfileType = userMapStateToPropsType & userMapDispatchToPropsType
 
 class ContainerProfile extends React.Component<ContainerProfileType> {
+    constructor(props:any) {
+        super(props);
+        this.state = {
+            userID : props.router.params.userID
+        }
+    }
     componentDidMount() {
-
         // @ts-ignore
         let userID = this.props.router.params.userID
-        if (!userID) {
-            userID = this.props.authUserID
-        }
+
         this.props.getProfileThunk(userID)
         this.props.getStatusThunk(userID)
+    }
+    componentDidUpdate(prevProps: Readonly<ContainerProfileType>, prevState: Readonly<{}>, snapshot?: any) {
+        // @ts-ignore
+        if (prevProps.router.params.userID !== this.props.router.params.userID ){
+            // @ts-ignore
+            let userID = this.props.router.params.userID
+
+            this.props.getProfileThunk(userID)
+            this.props.getStatusThunk(userID)
+        }
     }
 
     render() {
@@ -45,11 +58,11 @@ class ContainerProfile extends React.Component<ContainerProfileType> {
     }
 }
 
-let mapStateToProps = (state: AppStateType): mapStateToPropsType => ({
+let mapStateToProps = (state: AppStateType): userMapStateToPropsType => ({
     profileInfo: state.profilePage.profile,
     isAuth: state.auth.isAuthorized,
     status: state.profilePage.status,
-    authUserID: state.auth.id
+    authUserID: state.auth.id,
 })
 
 export default compose<React.ComponentType>(

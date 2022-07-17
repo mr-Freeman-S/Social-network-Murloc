@@ -59,7 +59,7 @@ const profileReducer = (state: initialProfileStateType = initialState, action: A
 
             return {...state, postData: [newPost, ...state.postData]}
         case CHANGE_PROFILE:
-            return {...state, profile: action.profile}
+            return {...state, profile: {...action.profile}}
         case SET_STATUS:
             return {...state, status: action.status}
         case DELETE_POST:

@@ -7,14 +7,16 @@ import newsImg from '../../assets/NavButton/news.png'
 import musicImg from '../../assets/NavButton/music.png'
 import settingImg from '../../assets/NavButton/gear.png'
 import SideBar from "./SideBar";
-
+import {useSelector} from "react-redux";
+import {AppStateType} from "../../redux/redux-store";
 
 type NavbarPropsType = {}
 
 const Navbar = (props: NavbarPropsType) => {
+    const myProfileId = useSelector<AppStateType>(state => state.auth.id)
     return (
         <nav className={style.nav}>
-            <div><NavLink to="/profile" className={style.navItem}><img alt="iconProfile" src={profileImg}/>Profile</NavLink></div>
+            <div><NavLink to={`/profile/${myProfileId}`} className={style.navItem}><img alt="iconProfile" src={profileImg}/>Profile</NavLink></div>
             <div><NavLink to="/dialogs" className={style.navItem}><img  alt="iconMessage" src={messageImg}/>Messages</NavLink></div>
             <div><NavLink to="/news" className={style.navItem}><img alt="iconNews" src={newsImg}/>News</NavLink></div>
             <div><NavLink to="/music" className={style.navItem}><img alt="iconMusic" src={musicImg}/>Music</NavLink></div>
