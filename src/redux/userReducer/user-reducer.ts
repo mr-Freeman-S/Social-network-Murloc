@@ -1,6 +1,6 @@
-import {followOrUser, getUsersAPI} from "../api/api";
+import {followOrUser, getUsersAPI} from "../../api/api";
 import {Dispatch} from "redux";
-import {updateObjectInArray} from "../untils/object-helpers";
+import {updateObjectInArray} from "../../untils/object-helpers";
 
 export type userType = {
     "name": string,

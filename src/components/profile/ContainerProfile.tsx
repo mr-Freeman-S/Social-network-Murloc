@@ -8,7 +8,7 @@ import {
     ProfileType,
     setUserProfile,
     updateStatusThunk
-} from "../../redux/profile-reducer";
+} from "../../redux/profileReducer/profile-reducer";
 import {withRouter} from "../../hoc/withRouter";
 import {withAuthRedirect} from "../../hoc/wuthAuthRedirect";
 import {compose} from "redux";

@@ -1,6 +1,6 @@
 import {ChangeEvent} from "react";
 import {dialogsType, messageType} from "./dialogs-reducer";
-import {postType} from "./profile-reducer";
+import {postType} from "./profileReducer/profile-reducer";
 
 
 export type profilePageType = {

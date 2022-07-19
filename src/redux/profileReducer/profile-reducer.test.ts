@@ -3,7 +3,7 @@ import profileReducer, {
     deletePostAC,
     initialProfileStateType, setStatus,
     setUserProfile
-} from "../profile-reducer";
+} from "./profile-reducer";
 import {v1} from "uuid";
 
 let state = <initialProfileStateType>{

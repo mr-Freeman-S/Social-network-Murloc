@@ -8,7 +8,7 @@ import {
     unfollowAC,
     userReducer,
     userType
-} from "../user-reducer";
+} from "./user-reducer";
 
 const user1 = <userType>{
     name: "slava",

@@ -8,14 +8,14 @@ import {
     getUsersThunkCreator,
     toggleIsFollowing,
     userType
-} from "../../redux/user-reducer";
+} from "../../redux/userReducer/user-reducer";
 import {
     getCurrentPage,
     getFollowIsProgress,
     getIsLoading,
     getPageSize,
     getTotalUsers, getUsers,
-} from "../../redux/user-selectors";
+} from "../../redux/userReducer/user-selectors";
 
 
 class UsersContainer extends React.Component<UsersContainerType> {

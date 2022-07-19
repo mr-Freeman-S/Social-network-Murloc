@@ -1,7 +1,7 @@
 import React from "react";
 import Post from "./post/Post";
 import style from './Posts.module.css'
-import {postType} from "../../../redux/profile-reducer";
+import {postType} from "../../../redux/profileReducer/profile-reducer";
 import AddPostFormRedux from "./AddPostForm";
 
 type PostsPropsType = {

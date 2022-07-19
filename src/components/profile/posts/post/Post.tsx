@@ -2,7 +2,7 @@ import React from "react";
 import style from './Post.module.css'
 import user from '../../../../assets/postImg/pngwing.png'
 import like from '../../../../assets/postImg/like.png'
-import {postType} from "../../../../redux/profile-reducer";
+import {postType} from "../../../../redux/profileReducer/profile-reducer";
 
 const Post = (props: postType) => {
     return (

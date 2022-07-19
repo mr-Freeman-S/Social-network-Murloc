@@ -1,7 +1,7 @@
 import React from "react";
 import userIcon from '../../../assets/pngwing1.png'
 import style from './ProfileInfo.module.css'
-import {ProfileType} from "../../../redux/profile-reducer";
+import {ProfileType} from "../../../redux/profileReducer/profile-reducer";
 import StatusText from "./StatusText";
 
 type ProfileInfoPropsType = {

@@ -2,7 +2,7 @@ import React, {FormEventHandler} from 'react';
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {Input} from "../common/FormsControls/FormControls";
 import {required} from "../../untils/validators";
-import {loginThunk} from "../../redux/auth-reducer";
+import {loginThunk} from "../../redux/authReducer/auth-reducer";
 import {connect} from "react-redux";
 
 export type LoginValueType = {

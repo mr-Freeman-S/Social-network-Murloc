@@ -2,7 +2,7 @@ import React from "react";
 import {CircularProgress, Pagination} from "@mui/material";
 import style from "./Users.module.css";
 import userPhoto from "../../assets/pngwing1.png";
-import {userType} from "../../redux/user-reducer";
+import {userType} from "../../redux/userReducer/user-reducer";
 import {NavLink} from "react-router-dom";
 
 

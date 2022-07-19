@@ -1,5 +1,5 @@
 import {Dispatch} from "redux";
-import {getAuthMe, login, logout} from "../api/api";
+import {getAuthMe, login, logout} from "../../api/api";
 import {stopSubmit} from "redux-form";
 
 const SET_USER_DATA = 'auth/SET_USER_DATA'

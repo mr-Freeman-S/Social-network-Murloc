@@ -1,4 +1,4 @@
-import authReducer, {authInitialStateType, setAuthUserDataAC, setFetchingAC} from "../auth-reducer";
+import authReducer, {authInitialStateType, setAuthUserDataAC, setFetchingAC} from "./auth-reducer";
 
 const state: authInitialStateType = {
     "id": null,
