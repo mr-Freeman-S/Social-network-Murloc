@@ -9,7 +9,6 @@ export const withRouter = (Component: JSXElementConstructor<userMapDispatchToPro
         let location = useLocation();
         let navigate = useNavigate();
         let params = useParams();
-        debugger
         return (
             <Component
                 {...props}
