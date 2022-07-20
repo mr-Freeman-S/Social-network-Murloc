@@ -4,6 +4,7 @@ import style from "./Users.module.css";
 import userPhoto from "../../assets/pngwing1.png";
 import {userType} from "../../redux/userReducer/user-reducer";
 import {NavLink} from "react-router-dom";
+import {PaginationC} from "./PaginationC";
 
 
 export type UsersPropsType = {
@@ -24,15 +25,13 @@ const Users: React.FC<UsersPropsType> = (props) => {
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
     }
-    const onChangeHandler = (event: React.ChangeEvent<unknown>, page: number) =>
+    const onChangeHandler = (page: number) =>
         props.onChangeCurrentPage(page)
     const followUnfollowHandler = (followed: boolean, id: number) => {
         followed ? props.followUnfollowThunk("delete", id)
             : props.followUnfollowThunk("post", id)
     }
     return <div>
-        <Pagination count={pagesCount} page={props.currentPage} onChange={onChangeHandler} size="large"
-                    showFirstButton showLastButton/>
         {props.isLoading ? <CircularProgress size={50}/>
             :
             props.usersData.map(el => {
@@ -53,6 +52,8 @@ const Users: React.FC<UsersPropsType> = (props) => {
                 </div>
             })
         }
+        <PaginationC totalItemsCount={props.totalUsers} pageSize={props.pageSize} currentItem={props.currentPage} onChangeCurrentItem={onChangeHandler} portionSize={10}/>
+
     </div>
 }
 
