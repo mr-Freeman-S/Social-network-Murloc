@@ -50,6 +50,10 @@ const LoginForm: React.FC<InjectedFormProps> = (props) => {
             <div>
                 <button>login</button>
             </div>
+            <div>
+                <h2>Test account : free@samuraijs.com</h2>
+                <h2>Password : free</h2>
+            </div>
         </form>)
 }
 const WithReduxFormLogin = reduxForm({form: 'login'})(LoginForm)

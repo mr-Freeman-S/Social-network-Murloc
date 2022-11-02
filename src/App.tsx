@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import Navbar from "./components/Navbar/Navbar";
 import Dialogs from "./components/Dialogs/Dialogs";
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {BrowserRouter, HashRouter, Route, Routes} from "react-router-dom";
 import ContainerHeader from "./components/Header/ContainerHeader";
 import LoginPage from "./components/Login/LoginPage";
 import ContainerProfile from "./components/profile/ContainerProfile";
@@ -12,7 +12,7 @@ const ContainerUsers = React.lazy(() => import("./components/Users/ContainerUser
 
 function App() {
     return (
-        <BrowserRouter>
+        <HashRouter>
             <div className='app-wrapper'>
                 <ContainerHeader/>
                 <Navbar/>
@@ -29,7 +29,7 @@ function App() {
                     </Routes>
                 </div>
             </div>
-        </BrowserRouter>
+        </HashRouter>
     );
 }
 
