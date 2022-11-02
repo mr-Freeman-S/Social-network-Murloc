@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/Social-network-Murloc/static/css/main.62b26083.css",
+    "main.js": "/Social-network-Murloc/static/js/main.73f7812c.js",
+    "static/css/430.b053b1ff.chunk.css": "/Social-network-Murloc/static/css/430.b053b1ff.chunk.css",
+    "static/js/430.4f4e9208.chunk.js": "/Social-network-Murloc/static/js/430.4f4e9208.chunk.js",
+    "static/js/787.28cb0dcd.chunk.js": "/Social-network-Murloc/static/js/787.28cb0dcd.chunk.js",
+    "static/media/nico-marks-763-mBawsfg-unsplash.jpg": "/Social-network-Murloc/static/media/nico-marks-763-mBawsfg-unsplash.53bfd37ce7d45aa74d2d.jpg",
+    "static/media/omid-armin-xOjzehJ49Hk-unsplash.jpg": "/Social-network-Murloc/static/media/omid-armin-xOjzehJ49Hk-unsplash.3cd92726a7662bbfb817.jpg",
+    "static/media/michael-dam-mEZ3PoFGs_k-unsplash.jpg": "/Social-network-Murloc/static/media/michael-dam-mEZ3PoFGs_k-unsplash.990bf8344d8845fea242.jpg",
+    "static/media/pngwing.png": "/Social-network-Murloc/static/media/pngwing.39cadbae094ff781ec53.png",
+    "static/media/pngwing1.png": "/Social-network-Murloc/static/media/pngwing1.39cadbae094ff781ec53.png",
+    "static/media/gear.png": "/Social-network-Murloc/static/media/gear.1a81c6c96d95a445285b.png",
+    "static/media/user.png": "/Social-network-Murloc/static/media/user.ae3a914be1e9f200b221.png",
+    "static/media/music.png": "/Social-network-Murloc/static/media/music.dc8ac713367dde3bcf71.png",
+    "static/media/news.png": "/Social-network-Murloc/static/media/news.45418d4463e4d91f00fb.png",
+    "static/media/like.png": "/Social-network-Murloc/static/media/like.05f7231e3025e5fa9429.png",
+    "index.html": "/Social-network-Murloc/index.html",
+    "main.62b26083.css.map": "/Social-network-Murloc/static/css/main.62b26083.css.map",
+    "main.73f7812c.js.map": "/Social-network-Murloc/static/js/main.73f7812c.js.map",
+    "430.b053b1ff.chunk.css.map": "/Social-network-Murloc/static/css/430.b053b1ff.chunk.css.map",
+    "430.4f4e9208.chunk.js.map": "/Social-network-Murloc/static/js/430.4f4e9208.chunk.js.map",
+    "787.28cb0dcd.chunk.js.map": "/Social-network-Murloc/static/js/787.28cb0dcd.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.62b26083.css",
+    "static/js/main.73f7812c.js"
+  ]
+}
