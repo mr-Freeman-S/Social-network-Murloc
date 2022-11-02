@@ -17,7 +17,7 @@ export const PaginationC: React.FC<paginationPropsType> = ({
                                                                portionSize = 5
                                                            }) => {
 
-    const [currentPortion, setCurrentPortion] = useState<number>(3)
+    const [currentPortion, setCurrentPortion] = useState<number>(1)
 
     const pageCount = Math.ceil(totalItemsCount / pageSize)
     const pages = []
