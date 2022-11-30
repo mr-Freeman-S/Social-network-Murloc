@@ -5,7 +5,7 @@ import {AppStateType} from "../../redux/redux-store";
 import {
     getProfileThunk,
     getStatusThunk,
-    ProfileType,
+    ProfileType, setPhotos,
     setUserProfile,
     updateStatusThunk
 } from "../../redux/profileReducer/profile-reducer";
@@ -24,6 +24,7 @@ export type userMapDispatchToPropsType = {
     getProfileThunk: (userID: number) => void
     getStatusThunk: (userID: string) => void
     updateStatusThunk: (status: string) => void
+    setPhotos: (photo: any) => void
 }
 type ContainerProfileType = userMapStateToPropsType & userMapDispatchToPropsType
 
@@ -53,7 +54,7 @@ class ContainerProfile extends React.Component<ContainerProfileType> {
     }
 
     render() {
-        return <Profile updateStatus={this.props.updateStatusThunk} status={this.props.status}
+        return <Profile setPhotos={this.props.setPhotos} ownerId={this.props.authUserID} updateStatus={this.props.updateStatusThunk} status={this.props.status}
                         profileInfo={this.props.profileInfo}/>
     }
 }
@@ -67,6 +68,6 @@ let mapStateToProps = (state: AppStateType): userMapStateToPropsType => ({
 
 export default compose<React.ComponentType>(
     withAuthRedirect,
-    connect(mapStateToProps, {updateStatusThunk, setUserProfile, getProfileThunk, getStatusThunk}),
+    connect(mapStateToProps, {updateStatusThunk, setUserProfile, getProfileThunk, getStatusThunk, setPhotos}),
     withRouter)
 (ContainerProfile)

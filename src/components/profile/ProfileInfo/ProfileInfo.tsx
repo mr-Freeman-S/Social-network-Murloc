@@ -3,14 +3,24 @@ import userIcon from '../../../assets/pngwing1.png'
 import style from './ProfileInfo.module.css'
 import {ProfileType} from "../../../redux/profileReducer/profile-reducer";
 import StatusText from "./StatusText";
+import {useDispatch} from "react-redux";
 
 type ProfileInfoPropsType = {
     profileInfo: ProfileType | null
     status: string
     updateStatus: (status: string) => void
+    setPhotos: (photo: any) => void
+    ownerId: number | null
 }
 
 const ProfileInfo = (props: ProfileInfoPropsType) => {
+
+    const onUploadMainImage  = (e:React.ChangeEvent<HTMLInputElement>) => {
+        debugger
+        if(e.target.files){
+            props.setPhotos(e.target.files[0])
+        }
+    }
     return (
         <div className={style.content}>
             <div><h1>{props.profileInfo?.fullName}</h1>
@@ -21,6 +31,7 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
                     <img className={style.userIcon}
                          src={props.profileInfo?.photos.large ? props.profileInfo?.photos.large : userIcon}
                          alt="userIcon"/>
+                    {props.ownerId == props.profileInfo?.userId && <input onChange={onUploadMainImage} type="file"/>}
                 </div>
             </div>
             <div className={style.contacts}>

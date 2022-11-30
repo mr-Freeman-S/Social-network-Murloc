@@ -1,5 +1,5 @@
 import React from "react";
-import {CircularProgress, Pagination} from "@mui/material";
+import {CircularProgress} from "@mui/material";
 import style from "./Users.module.css";
 import userPhoto from "../../assets/pngwing1.png";
 import {userType} from "../../redux/userReducer/user-reducer";

@@ -1,12 +1,13 @@
 import {v1} from "uuid";
 import {Dispatch} from "redux";
-import {getProfile, getStatus, updateStatus} from "../../api/api";
+import {getProfile, getStatus, savePhoto, updateStatus} from "../../api/api";
 import {AppStateType} from "../redux-store";
 
 const ADD_POST = 'ADD-POST'
 const CHANGE_PROFILE = "CHANGE_PROFILE"
 const SET_STATUS = 'SET_STATUS'
 const DELETE_POST = 'DELETE_POST'
+const SET_PHOTOS = 'SET_PHOTOS'
 
 export type postType = {
     id: string
@@ -64,20 +65,26 @@ const profileReducer = (state: initialProfileStateType = initialState, action: A
             return {...state, status: action.status}
         case DELETE_POST:
             return {...state, postData: state.postData.filter(el => el.id !== action.id)}
+        case SET_PHOTOS:
+            // @ts-ignore
+            return {...state, profile: {...state.profile ,photos: {...action.photos}}}
+
+
         default:
             return state
     }
 }
-type ActionsTypes = addNewPostACType | setUserProfileType | setStatusType | deletePostType
+type ActionsTypes = addNewPostACType | setUserProfileType | setStatusType | deletePostType | setPhotoSuccessType
 export type addNewPostACType = ReturnType<typeof addNewPostAC>
 export type setUserProfileType = ReturnType<typeof setUserProfile>
 export type setStatusType = ReturnType<typeof setStatus>
 export type deletePostType = ReturnType<typeof deletePostAC>
+export type setPhotoSuccessType = ReturnType<typeof setPhotoSuccess>
 
 export const setStatus = (status: string) => ({type: SET_STATUS, status} as const)
 export const addNewPostAC = (newPost: string) => ({type: ADD_POST, newPost} as const)
 export const deletePostAC = (id: string) => ({type: DELETE_POST, id} as const)
-
+export const setPhotoSuccess = (photos: any) => ({type: SET_PHOTOS, photos} as const)
 export const setUserProfile = (profile: ProfileType) =>
     ({type: CHANGE_PROFILE, profile} as const)
 //thunks
@@ -99,5 +106,13 @@ export const updateStatusThunk = (status: string) => async (dispatch: Dispatch) 
         dispatch(setStatus(status))
     }
 }
+export const setPhotos = (photo: any) => async (dispatch: Dispatch) => {
+    const response = await savePhoto(photo)
+    if (response.resultCode === 0) {
+        debugger
+        dispatch(setPhotoSuccess(response.data.photos))
+    }
+}
+
 
 export default profileReducer;
