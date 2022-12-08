@@ -38,13 +38,11 @@ export const logout = () => {
     return instance.delete(`auth/login`).then(response => response.data)
 }
 
-export const savePhoto = (photo:any) => {
-    let formData = new FormData
-    formData.append('image',photo)
-    console.log(photo)
-    console.log(formData)
-    return instance.put(`profile/photo`, formData,{
-        headers:{
+export const savePhoto = (photo: any) => {
+    let formData = new FormData();
+    formData.append('image', photo)
+    return instance.put(`profile/photo`, formData, {
+        headers: {
             "Content-Type": "multipart/form-data"
         }
     }).then(response => response.data)
