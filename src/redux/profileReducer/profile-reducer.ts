@@ -101,7 +101,7 @@ export const setEditMode = (isEditMode: boolean) => ({type: SET_EDIT_MODE, isEdi
 //thunks
 export const getProfileThunk = (userID: number) => async (dispatch: Dispatch, getState: () => AppStateType) => {
     if (!userID) {
-        userID = <number>getState().auth.id
+        userID = getState().auth.id as number
     }
     const response = await getProfile(userID)
     dispatch(setUserProfile(response))

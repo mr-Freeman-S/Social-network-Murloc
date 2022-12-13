@@ -6,6 +6,7 @@ import {userReducer} from "./userReducer/user-reducer";
 import authReducer from "./authReducer/auth-reducer";
 import thunkMiddleWare from "redux-thunk";
 import {reducer as formReducer} from "redux-form"
+import {useSelector} from "react-redux";
 
 const rootReducer = combineReducers({
     profilePage: profileReducer,
@@ -23,6 +24,5 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunkMiddleWare)
 ));
 //let store = createStore(rootReducer, applyMiddleware(thunkMiddleWare))
-
 
 export default store;

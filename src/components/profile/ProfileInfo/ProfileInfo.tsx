@@ -1,9 +1,12 @@
 import React from "react";
 import userIcon from '../../../assets/pngwing1.png'
 import style from './ProfileInfo.module.css'
-import {ProfileType} from "../../../redux/profileReducer/profile-reducer";
+import {ProfileType, setEditMode} from "../../../redux/profileReducer/profile-reducer";
 import StatusText from "./StatusText";
 import ContactsProfile from "./Contacts/ContactsProfile";
+import {useDispatch, useSelector} from "react-redux";
+import {RootStateType} from "../../../redux/store";
+import {AppStateType} from "../../../redux/redux-store";
 
 type ProfileInfoPropsType = {
     profileInfo: ProfileType | null
@@ -14,12 +17,17 @@ type ProfileInfoPropsType = {
 }
 
 const ProfileInfo = (props: ProfileInfoPropsType) => {
+    const isEditMode = useSelector<AppStateType,boolean>(state => state.profilePage.isEditMode)
+    const dispatch = useDispatch()
 
     const onUploadMainImage = (e: React.ChangeEvent<HTMLInputElement>) => {
         debugger
         if (e.target.files) {
             props.setPhotos(e.target.files[0])
         }
+    }
+    const setEditModeHandler = () => {
+        dispatch(setEditMode(!isEditMode))
     }
     return (
         <div className={style.content}>
@@ -40,12 +48,13 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
                     {props.profileInfo ? Object.keys(props.profileInfo.contacts).map((key) => {
                         if (props.profileInfo) {
                             // @ts-ignore
-                            return <ContactsProfile contactTitle={key} contactValue={props.profileInfo.contacts[key]}/>
+                            return <ContactsProfile isEditMode={isEditMode} contactTitle={key} contactValue={props.profileInfo.contacts[key]}/>
                         }
+                        return null
                     }) : null}
                 </ul>
             </div>
-
+            {props.ownerId === props.profileInfo?.userId && (isEditMode? <button onClick={setEditModeHandler}>Edit profile</button> : <button onClick={setEditModeHandler}>Save</button>)}
         </div>
     );
 }

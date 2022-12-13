@@ -1,15 +1,16 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 type ContactsPropsType = {
     contactTitle: string
     contactValue: string | null
+    isEditMode: boolean
 }
 
-const ContactsProfile = ({contactValue,contactTitle}:ContactsPropsType) => {
-
+const ContactsProfile = ({isEditMode,contactValue,contactTitle}:ContactsPropsType) => {
+    const [text,setText] = useState(contactValue || '')
     return (
         <li>
-            <span>{contactTitle} </span> : <span> {contactValue}</span>
+            {isEditMode ? <input type='text' onChange={(e)=>setText(e.target.value)} value={text} /> :<span><span>{contactTitle} </span> : <span> {contactValue}</span></span> }
         </li>
     );
 };

@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import Navbar from "./components/Navbar/Navbar";
 import Dialogs from "./components/Dialogs/Dialogs";
-import {BrowserRouter, HashRouter, Route, Routes} from "react-router-dom";
+import {HashRouter, Route, Routes} from "react-router-dom";
 import ContainerHeader from "./components/Header/ContainerHeader";
 import LoginPage from "./components/Login/LoginPage";
 import ContainerProfile from "./components/profile/ContainerProfile";
