@@ -15,15 +15,14 @@
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.4.0",
     "@types/node": "^16.11.21",
-    "@types/react": "^17.0.38",
-    "@types/react-dom": "^17.0.11",
+    "@types/react-dom": "^18.0.2",
     "@types/react-redux": "^7.1.23",
     "@types/redux-form": "^8.3.5",
     "@types/uuid": "^8.3.4",
     "axios": "^0.26.1",
     "gh-pages": "^4.0.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
@@ -40,8 +39,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy" : "npm run build",
-    "deploy" : "gh-pages -d build"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -62,7 +61,11 @@
     ]
   },
   "devDependencies": {
-    "@types/react-test-renderer": "^17.0.2",
-    "react-test-renderer": "17.0.2"
+    "@types/react-test-renderer": "^18.0.0",
+    "react-test-renderer": "18.1.0"
+  },
+  "resolutions": {
+    "@types/react": "18.1.0",
+    "@types/react-dom": "18.1.0"
   }
 }

@@ -9,6 +9,7 @@ import {Provider} from "react-redux";
 
 const rerenderEntireTree = (store: any) => {
     render(
+        // @ts-ignore
         <Provider store={store}>
             <App/>
         </Provider>

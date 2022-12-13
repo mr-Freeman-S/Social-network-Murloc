@@ -8,6 +8,7 @@ const CHANGE_PROFILE = "CHANGE_PROFILE"
 const SET_STATUS = 'SET_STATUS'
 const DELETE_POST = 'DELETE_POST'
 const SET_PHOTOS = 'SET_PHOTOS'
+const SET_EDIT_MODE = 'SET_EDIT_MODE'
 
 export type postType = {
     id: string
@@ -17,7 +18,7 @@ export type postType = {
 export type ProfileType = {
     "aboutMe": null | string,
     "contacts": {
-        'dqwd': string
+        'dqwd': string | null
         "facebook": null | string,
         "website": null | string,
         "vk": null | string,
@@ -39,7 +40,8 @@ export type ProfileType = {
 export type initialProfileStateType = {
     profile: null | ProfileType
     postData: Array<postType>
-    status: string
+    status: string,
+    isEditMode: boolean
 }
 
 let initialState: initialProfileStateType = {
@@ -50,7 +52,8 @@ let initialState: initialProfileStateType = {
         {id: v1(), post: "Do you like Murlok?", likeCount: 999},
         {id: v1(), post: "i'm geek", likeCount: -1}
     ],
-    status: ''
+    status: '',
+    isEditMode: false
 }
 
 const profileReducer = (state: initialProfileStateType = initialState, action: ActionsTypes): initialProfileStateType => {
@@ -65,33 +68,40 @@ const profileReducer = (state: initialProfileStateType = initialState, action: A
             return {...state, status: action.status}
         case DELETE_POST:
             return {...state, postData: state.postData.filter(el => el.id !== action.id)}
+        case SET_EDIT_MODE:
+            return {...state, isEditMode: action.isEditMode}
         case SET_PHOTOS:
             // @ts-ignore
-            return {...state, profile: {...state.profile ,photos: {...action.photos}}}
-
-
+            return {...state, profile: {...state.profile, photos: {...action.photos}}}
         default:
             return state
     }
 }
-type ActionsTypes = addNewPostACType | setUserProfileType | setStatusType | deletePostType | setPhotoSuccessType
+type ActionsTypes =
+    addNewPostACType
+    | setUserProfileType
+    | setStatusType
+    | deletePostType
+    | setPhotoSuccessType
+    | setIsEditModeType
 export type addNewPostACType = ReturnType<typeof addNewPostAC>
 export type setUserProfileType = ReturnType<typeof setUserProfile>
 export type setStatusType = ReturnType<typeof setStatus>
 export type deletePostType = ReturnType<typeof deletePostAC>
 export type setPhotoSuccessType = ReturnType<typeof setPhotoSuccess>
+export type setIsEditModeType = ReturnType<typeof setEditMode>
 
 export const setStatus = (status: string) => ({type: SET_STATUS, status} as const)
 export const addNewPostAC = (newPost: string) => ({type: ADD_POST, newPost} as const)
 export const deletePostAC = (id: string) => ({type: DELETE_POST, id} as const)
-export const setPhotoSuccess = (photos: any) => ({type: SET_PHOTOS, photos} as const)
-export const setUserProfile = (profile: ProfileType) =>
-    ({type: CHANGE_PROFILE, profile} as const)
+export const setPhotoSuccess = (photos: any ) => ({type: SET_PHOTOS, photos} as const)
+export const setUserProfile = (profile: ProfileType) => ({type: CHANGE_PROFILE, profile} as const)
+export const setEditMode = (isEditMode: boolean) => ({type: SET_EDIT_MODE, isEditMode} as const)
+
 //thunks
 export const getProfileThunk = (userID: number) => async (dispatch: Dispatch, getState: () => AppStateType) => {
     if (!userID) {
-        // @ts-ignore
-        userID = getState().auth.id
+        userID = <number>getState().auth.id
     }
     const response = await getProfile(userID)
     dispatch(setUserProfile(response))
