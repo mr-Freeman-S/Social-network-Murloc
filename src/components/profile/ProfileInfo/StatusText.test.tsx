@@ -1,7 +1,6 @@
 import React from 'react'
 import StatusText from "./StatusText";
 import TestRenderer, {act} from "react-test-renderer";
-import {isBooleanObject} from "util/types";
 
 
 describe('StatusText component', () => {
