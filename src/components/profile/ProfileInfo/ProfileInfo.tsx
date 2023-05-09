@@ -32,7 +32,7 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
     return (
         <div className={style.content}>
             <div><h1>{props.profileInfo?.fullName}</h1>
-                <StatusText status={props.status} updateStatus={props.updateStatus}/>
+                <StatusText status={props.status} updateStatus={props.updateStatus} isOwner={props.ownerId === props.profileInfo?.userId}/>
                 <div>{props.ownerId === props.profileInfo?.userId && (isEditMode ?
                     <Button variant="contained" onClick={setEditModeHandler}>Save profile</Button> :
                     <Button variant="contained" onClick={setEditModeHandler}>Edit profile</Button>)}</div>

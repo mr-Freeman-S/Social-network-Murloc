@@ -10,7 +10,7 @@ const ContactsProfile = ({isEditMode,contactValue,contactTitle}:ContactsPropsTyp
     const [text,setText] = useState(contactValue || '')
     return (
         <li>
-            {isEditMode ? <input type='text' onChange={(e)=>setText(e.target.value)} value={text} /> :<span><span>{contactTitle} </span> : <span> {contactValue}</span></span> }
+            {isEditMode ? <span><span>{contactTitle} </span><input type='text' onChange={(e)=>setText(e.target.value)} value={text} /></span> :<span><span>{contactTitle} </span> : <span> {contactValue}</span></span> }
         </li>
     );
 };
