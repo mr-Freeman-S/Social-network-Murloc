@@ -1,5 +1,5 @@
 import React, {ChangeEvent, useEffect, useState} from 'react';
-import {Button} from "@mui/material";
+import {Button, TextField} from "@mui/material";
 import {EditIcon} from "../../../assets/icons/EditIcon";
 
 type StatusTextType = {
@@ -32,8 +32,8 @@ const StatusText: React.FC<StatusTextType> = ({status, updateStatus,isOwner}) =>
     return (
         <>
             { isOwner ? editToggle ?
-                <input autoFocus onBlur={onBlurHandler} onChange={onChangeHandler}
-                       value={valueStatus} type="text"/> :
+                <TextField autoFocus onBlur={onBlurHandler} onChange={onChangeHandler} value={valueStatus} type="text" label="Your Status" variant="outlined" />
+                :
             <Button style={{color: "black"}} onDoubleClick={onDoubleClickHandler} startIcon={<EditIcon/>} variant="text">{status || "------"}</Button>
                 : <span>{status || "------"}</span>
             }
