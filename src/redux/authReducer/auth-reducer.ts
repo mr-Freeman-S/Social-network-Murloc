@@ -49,34 +49,34 @@ export const setAuthUserDataAC = (userData: userAuthData, isAuth: boolean) => ({
 } as const)
 
 
-export const authMeThunk = () =>async (dispatch: Dispatch) => {
+export const authMeThunk = () => async (dispatch: Dispatch) => {
     dispatch(setFetchingAC(true))
-       const response = await getAuthMe()
-            if (response.resultCode === 0) {
-                dispatch(setAuthUserDataAC(response.data, true))
-            }
-            dispatch(setFetchingAC(false))
-        }
+    const response = await getAuthMe()
+    if (response.resultCode === 0) {
+        dispatch(setAuthUserDataAC(response.data, true))
+    }
+    dispatch(setFetchingAC(false))
+}
 
 
 export const loginThunk = (email: string, password: string, rememberMe: boolean) => async (dispatch: any) => {
-   const response = await login(email, password, rememberMe)
-        if (response.resultCode === 0) {
-            dispatch(authMeThunk())
-        } else {
+    const response = await login(email, password, rememberMe)
+    if (response.resultCode === 0) {
+        dispatch(authMeThunk())
+    } else {
 
-            let message = response.messages.length > 0 ? response.messages[0] : "Some error"
-            dispatch(stopSubmit('login', {_error: message}))
-        }
+        let message = response.messages.length > 0 ? response.messages[0] : "Some error"
+        dispatch(stopSubmit('login', {_error: message}))
     }
-export const logoutThunk = () =>async (dispatch: any) => {
-   const response = await logout()
-        if (response.resultCode === 0) {
-            dispatch(authMeThunk())
-            dispatch(setAuthUserDataAC({
-                "id": null, "login": null,
-                "email": null
-            }, false))
-        }
+}
+export const logoutThunk = () => async (dispatch: any) => {
+    const response = await logout()
+    if (response.resultCode === 0) {
+        dispatch(authMeThunk())
+        dispatch(setAuthUserDataAC({
+            "id": null, "login": null,
+            "email": null
+        }, false))
+    }
 }
 export default authReducer;

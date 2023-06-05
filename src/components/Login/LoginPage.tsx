@@ -1,9 +1,11 @@
-import React, {FormEventHandler} from 'react';
+import React, {FormEventHandler, useEffect} from 'react';
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {Input} from "../common/FormsControls/FormControls";
 import {required} from "../../untils/validators";
 import {loginThunk} from "../../redux/authReducer/auth-reducer";
-import {connect} from "react-redux";
+import {connect, useSelector} from "react-redux";
+import {useNavigate} from "react-router-dom";
+import {AppStateType} from "../../redux/redux-store";
 
 export type LoginValueType = {
     email: string
@@ -27,6 +29,7 @@ type LoginPagePropsType = {
 const LoginPage = (props: LoginPagePropsType) => {
     const submit = (value: any) => {
         props.loginThunk(value.email, value.password, value.rememberMe)
+
     }
     return (
         <div>
@@ -38,6 +41,15 @@ const LoginPage = (props: LoginPagePropsType) => {
 
 
 const LoginForm: React.FC<InjectedFormProps> = (props) => {
+    const isAuthorized = useSelector<AppStateType>(state => state.auth.isAuthorized)
+    const id = useSelector<AppStateType>(state => state.auth.id)
+    const navigate = useNavigate()
+    const redirectToProfileOrAuth = () => {
+        isAuthorized ? navigate(`/profile/${id}`) : navigate('/login')
+    }
+    useEffect(() => {
+        redirectToProfileOrAuth()
+    }, [isAuthorized])
     const {handleSubmit} = props
     return (
         <form onSubmit={handleSubmit}>
